@@ -1,12 +1,12 @@
 # Facebook_clone-client
 
-**Login:**
+**Login Page:**
 ![image](https://github.com/user-attachments/assets/c6c50cf4-a76c-4c1f-a8c7-6be02d0019ad)
 
-**Sign Up**
+**Sign Up Page:**
 ![signup](https://github.com/user-attachments/assets/a3dff348-9a64-4051-b8df-e340f14aab2b)
 
-**Feed**
+**Feed Page:**
 ![umberlla](https://github.com/user-attachments/assets/eb33fba3-cac0-44a0-a3d3-aa0aeeb5e542)
 
 ![‏‏comment](https://github.com/user-attachments/assets/bc47bdef-1bdd-48e5-b8af-fb7acf65312f)
