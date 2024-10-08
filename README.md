@@ -1,5 +1,12 @@
 # Facebook_clone-client
-![‏‏login](https://github.com/user-attachments/assets/c9d76d4f-4333-44ab-9c9e-5d8e2cd464a9)
+
+**Login:**
+![image](https://github.com/user-attachments/assets/c6c50cf4-a76c-4c1f-a8c7-6be02d0019ad)
+
+**Sign Up**
+![signup](https://github.com/user-attachments/assets/a3dff348-9a64-4051-b8df-e340f14aab2b)
+
+**Feed**
 ![umberlla](https://github.com/user-attachments/assets/eb33fba3-cac0-44a0-a3d3-aa0aeeb5e542)
 
 ![‏‏comment](https://github.com/user-attachments/assets/bc47bdef-1bdd-48e5-b8af-fb7acf65312f)
@@ -11,13 +18,16 @@ wiki: https://github.com/edenbdv/Facebook_clone-Server.git
 
 ## Features
 
-- **Sign Up and Login:** Foobar allows users to create accounts securely with a unique username and password. Users can then log in to access their account and use the app's features.
+- **Sign Up and Login:** Foobar allows users to create accounts securely with a unique username and password. Users can then log in to access their account and use the app's features. 
+Notice that in the Signup You must upload a profile picture, and your full name should only consist of letters. Your username must be unique, and your password must contain at least 8 characters, including letters and numbers, and it must match the password you entered again.
 
-- **Feed:** The heart of Foobar is its feed, where the user can see updates, posts, and media. 
+
+- **Feed:** The core feature of Foobar is its feed, where users can view updates, posts, and media. On the feed page, you'll find all the posts on Foobar. You have the ability to create new posts, edit existing ones, and delete them as needed. Additionally, you can comment on posts and like them.
+In addition, At the top menu, you'll find the search box along with two buttons: the Log Out button, which redirects you to the login page and logs out the current user, and the Night Mode button, which switches the site's theme.
 
 ## Technologies Used
 
-- **Frontend:** The frontend of Foobar is built using modern web technologies such as HTML, CSS, and JavaScript. It utilizes frameworks like React.js for dynamic user interfaces and smooth interactions.
+- **Frontend:** The frontend of Foobar is built with **HTML, CSS, and JavaScript, utilizing React.js** for dynamic user interfaces. It features reusable components for improved maintainability and scalability. React Hooks manage state and side effects efficiently, while the Fetch API allows asynchronous data retrieval, keeping the UI responsive. This integration of form handling, data fetching, and conditional rendering ensures a smooth user experience, complemented by React's ecosystem of routing and state management libraries.
 
 ## Dependencies
 
