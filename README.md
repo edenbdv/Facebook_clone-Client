@@ -1,8 +1,13 @@
-# Foobar
+# Facebook_clone-client
+![‏‏login](https://github.com/user-attachments/assets/c9d76d4f-4333-44ab-9c9e-5d8e2cd464a9)
+![umberlla](https://github.com/user-attachments/assets/eb33fba3-cac0-44a0-a3d3-aa0aeeb5e542)
 
-Foobar is a social networking application similar to Facebook, designed to connect people and support sharing of updates and photos.
+![‏‏comment](https://github.com/user-attachments/assets/bc47bdef-1bdd-48e5-b8af-fb7acf65312f)
 
-wiki: https://github.com/edenbdv/FooBar-Server/tree/main/wiki
+
+"Foobar" is a social networking application similar to Facebook, designed to connect people and support sharing of updates and photos.
+
+wiki: https://github.com/edenbdv/Facebook_clone-Server.git
 
 ## Features
 
@@ -26,20 +31,16 @@ wiki: https://github.com/edenbdv/FooBar-Server/tree/main/wiki
 1. Clone the repository:
 
    ```bash
-   git clone client
-   https://github.com/nogazit99/FB
-   git clone server
-   https://github.com/edenbdv/FooBar-Server.git 
+   git clone client https://github.com/edenbdv/Facebook_clone-Client.git
+   git clone server https://github.com/edenbdv/Facebook_clone-Server.git
    ```
-the relevant branch in the FB repo is 'client' branch.
-
 
 2. Install dependencies for both client and server:
 
    ```bash
-   cd foobar/client
+   cd Facebook_clone-client
    npm install
-   cd ../server
+   cd ../Facebook_clone-Server
    npm install
    ```
 
@@ -48,23 +49,25 @@ the relevant branch in the FB repo is 'client' branch.
    ```bash
    npm run build
    ```
-
-4. Copy the `build/static` folder into the server directory:
-
+   
+4. Copy the `build/static` folder from the client into the server directory
 
 5. Set up configuration:
 
-   - In the `config` folder of both client and server, modify the `config.js` file to include the appropriate IP address and port for your server.
+   - In the `config` folder of both client and server, modify the `config.js` file to include the appropriate IP address and port (also in App.js) for your server.
 
 ## Usage
 
-1. Run the server:
+1. Run in the server:
 
    ```bash
    node app.js
    ```
-
-2. Access Foobar in your browser at `http://ip:port`.
+2. Run in the client:
+      ```bash
+   npm start
+   ```
+This will open "Foobar" in your browser at `http://ip:port`.
 
 
 ## Work Process
