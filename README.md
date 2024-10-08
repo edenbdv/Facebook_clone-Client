@@ -18,12 +18,9 @@ wiki: https://github.com/edenbdv/Facebook_clone-Server.git
 
 ## Features
 
-- **Sign Up and Login:** Foobar allows users to create accounts securely with a unique username and password. Users can then log in to access their account and use the app's features. 
-Notice that in the Signup You must upload a profile picture, and your full name should only consist of letters. Your username must be unique, and your password must contain at least 8 characters, including letters and numbers, and it must match the password you entered again.
+- **Sign Up and Login:** Foobar allows users to create accounts securely with a unique username and password. Users can then log in to access their accounts and use the app's features. Note that during signup, you must upload a profile picture, and your full name should only consist of letters. Your username must be unique, and your password must contain at least 8 characters, including letters and numbers, and it must match the password you entered again.
 
-
-- **Feed:** The core feature of Foobar is its feed, where users can view updates, posts, and media. On the feed page, you'll find all the posts on Foobar. You have the ability to create new posts, edit existing ones, and delete them as needed. Additionally, you can comment on posts and like them.
-In addition, At the top menu, you'll find the search box along with two buttons: the Log Out button, which redirects you to the login page and logs out the current user, and the Night Mode button, which switches the site's theme.
+- **Feed:** The core feature of Foobar is its feed, where users can view updates, posts, and media. On the feed page, you'll find all the posts on Foobar. You have the ability to create new posts, edit existing ones, and delete them as needed. Additionally, you can comment on posts and like them. At the top menu, you'll find a search box along with two buttons: the Log Out button, which redirects you to the login page and logs out the current user, and the Night Mode button, which switches the site's theme.
 
 ## Technologies Used
 
