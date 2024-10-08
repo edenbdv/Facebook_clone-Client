@@ -1,7 +1,7 @@
 const config = {
     server: {
         ip: 'localhost',
-        port: 12345
+        port: 12346
     }
 };
 
