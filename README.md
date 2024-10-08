@@ -77,6 +77,10 @@ wiki: https://github.com/edenbdv/Facebook_clone-Server.git
 This will open "Foobar" in your browser at `http://ip:port`.
 
 
+### Tip:
+For the best experience, log in using the credentials for user **Eden1@gmail.com** (Password: **Eden1234**), although any account will function properly.
+
+
 ## Work Process
 
 Our development process follows these steps:
