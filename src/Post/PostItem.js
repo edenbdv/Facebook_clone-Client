@@ -10,8 +10,7 @@ import EditPost from './Edit/EditPost';
 import EditPostForm from './Edit/EditPostForm'; // Import the EditPostForm component
 import DeletePost from './Delete/DeletePost';
 
-function PostItem({ _id, text, picture, authorP, authorN, date, username, onDelete, onEditPost }) {
-
+function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onDelete, onEditPost }) {
     const [editing, setEditing] = useState(false);
     const [liked, setLiked] = useState(false);
     const [editedText, setEditedText] = useState(text); // Define editedText
@@ -19,6 +18,20 @@ function PostItem({ _id, text, picture, authorP, authorN, date, username, onDele
     const [showComments, setShowComments] = useState(false);
     const [comments, setComments] = useState([]);
     const currentUser = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).username : null;
+
+    console.log("isoDate",isoDate)
+    const date = new Date(isoDate);
+    console.log("date",date)
+    const formattedDate = date.toLocaleString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false, 
+      });
+    console.log("formatted",formattedDate)
 
 
     const handleEditClick = () => {
@@ -119,7 +132,7 @@ function PostItem({ _id, text, picture, authorP, authorN, date, username, onDele
                                 <DeletePost onDeletePost={DeletePost} onClick={handleDeleteClick} />
                             </div>
                         )}
-                        <div className="text-muted ml-2">{date}</div>
+                        <div className="text-muted ml-2">{formattedDate}</div>
                     </div>
                 </div>
 

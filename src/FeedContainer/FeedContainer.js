@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../Screen/NavBar';
 import Menu from '../Screen/Menu';
 import ThinkBox from '../Screen/ThinkBox';
-import AddPost from '../Post/Add/AddPost';
 import Feed from '../Screen/Feed';
-import PostItem from '../Post/PostItem';
 import {fetchUserPosts} from '../Screen/api'
 import '../Screen/style.css'; // Import your CSS file
 const config = require('../config'); 
