@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchUserData, sendFriendRequest } from './api'; // Import functions to fetch user data and send friend request
+import { fetchUserData, sendFriendRequest } from '../api'; // Import functions to fetch user data and send friend request
 
 const NonFriendProfile = ({ senderUser, username, token }) => {
     const [userData, setUserData] = useState(null);

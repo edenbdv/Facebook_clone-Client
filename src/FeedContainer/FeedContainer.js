@@ -20,7 +20,11 @@ function FeedContainer({ token }) {
     // Fetch posts for the current user
     const storedUserData = localStorage.getItem('userData');
     if (storedUserData) {
-      setUserData(JSON.parse(storedUserData));
+      // setUserData(JSON.parse(storedUserData));
+      const parsedUserData = JSON.parse(storedUserData);
+      setUserData(parsedUserData);
+      console.log("userData check:", parsedUserData);  // Log the userData to console
+
     }
 
     if (token) {
@@ -55,27 +59,6 @@ function FeedContainer({ token }) {
   };
 
 
-// const addNewPost = async (text, picture) => {
-//   try {
-//     const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/users/${userData.username}/posts`, {
-//       method: 'POST',
-//       headers: {
-//         'Authorization': `Bearer ${token}`,
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify({ text, picture }) // Send text and picture separately
-//     });
-//     if (response.ok) {
-//       const createdPost = await response.json();
-//       setPosts([createdPost, ...posts]);
-//       //setPostIdCounter(prevCounter => prevCounter + 1); // Increment the counter for the next post
-//     } else {
-//       console.error('Error adding post:', response.statusText);
-//     }
-//   } catch (error) {
-//     console.error('Error adding post:', error);
-//   }
-// };
 
 const addNewPost = async (text, picture) => {
   try {
@@ -119,11 +102,6 @@ const addNewPost = async (text, picture) => {
 };
 
 
-
-// // Function to delete a post from the list
-// const deletePost = (postId) => {
-//   setPosts(posts.filter(post => post.id !== postId));
-// };
 
 const deletePost = async (postId) => {
   try {
@@ -188,29 +166,6 @@ const editPost = async (postId, fieldName, newValue) => {
   }
 };
 
-
-
-// const editPost = async (postId, fieldName, newValue) => {
-//   try {
-//     const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/Users/${userData.username}/posts/${postId}`, {
-//       method: 'PATCH',
-//       headers: {
-//         'Authorization': `Bearer ${token}`,
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify({ [fieldName]: newValue }) // Dynamically set the field name and new value
-//     });
-//     if (response.ok) {
-//       // If the request was successful, reload the page to reflect the changes
-//       // fetchPosts();
-//       // fetchUserPosts(userData.username, token);
-//     } else {
-//       console.error('Error editing post:', response.statusText);
-//     }
-//   } catch (error) {
-//     console.error('Error editing post:', error);
-//   }
-// };
 
 
 // Function to toggle night mode

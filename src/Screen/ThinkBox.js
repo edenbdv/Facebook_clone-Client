@@ -13,12 +13,14 @@ const ThinkBox = ({ addNewPost , proPic, authorName }) => {
         setPopupVisible(false);
     };
 
+    const imageUrl = `data:image/jpeg;base64,${proPic}`;
+
     return (
         <div className="box-container d-flex justify-items-center">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
             {/* Round Image */}
             <img
-                src={proPic}  // Replace with the path to your image
+                src={imageUrl}  // Replace with the path to your image
                 alt="Profile Image"
                 className="rounded-circle profile-image"
             />

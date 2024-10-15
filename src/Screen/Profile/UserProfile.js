@@ -1,12 +1,12 @@
 // UserProfile.js
 import React, { useEffect, useState } from 'react';
 import './Profile.css';
-import Feed from './Feed';
+import Feed from '../Feed';
 import EditProfilePopup from './EditProfilePopup';
-import FriendListPopup from './FriendList'; // Import the FriendListPopup component
+import FriendListPopup from '../FriendList'; // Import the FriendListPopup component
 import { useParams, useNavigate } from 'react-router-dom';
-import FRequestsPopup from './FRequestsPopup';
-import { fetchUserPosts, fetchFriendsList, saveChanges, deleteUserProfile } from './api';
+import FRequestsPopup from '../FRequestsPopup';
+import { fetchUserPosts, fetchFriendsList, saveChanges, deleteUserProfile } from '../api';
 
 const UserProfile = ({ token, onDelete, onEditPost }) => {
     const [userData, setUserData] = useState(null);

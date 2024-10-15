@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import UserProfile from './UserProfile';
-import FriendProfile from './FriendProfile';
+import FriendProfile from './FriendProfile'; 
 import NonFriendProfile from './NonFriendProfile';
-import { fetchFriendsList } from './api';
+import { fetchFriendsList } from '../api';
 
 const Profile = ({ token }) => {
     const { username } = useParams(); // Get the username parameter from the URL

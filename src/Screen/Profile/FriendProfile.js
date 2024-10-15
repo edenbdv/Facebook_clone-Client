@@ -1,10 +1,10 @@
 // FriendProfile.js
 import React, { useEffect, useState } from 'react';
 import './Profile.css';
-import Feed from './Feed';
-import FriendListPopup from './FriendList'; // Import the FriendListPopup component
+import Feed from '../Feed';
+import FriendListPopup from '../FriendList'; // Import the FriendListPopup component
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchUserData, fetchUserPosts, fetchFriendsList } from './api';
+import { fetchUserData, fetchUserPosts, fetchFriendsList } from '../api';
 
 const FriendProfile = ({ username, token }) => {
     const [friendData, setFriendData] = useState(null);
