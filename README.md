@@ -7,8 +7,8 @@
 ![image](https://github.com/user-attachments/assets/f0c9c4f3-20bd-4cc9-b677-a5f4d6371ed9)
 
 **Feed Page:**
+<img width="939" alt="Feed" src="https://github.com/user-attachments/assets/8f12b026-2239-4de2-a0d1-dd62228050d1">
 
-<img width="919" alt="Feed" src="https://github.com/user-attachments/assets/7772732f-e6b2-4498-882d-f04477c6fcb5">
 
 
 ![‏‏comment](https://github.com/user-attachments/assets/bc47bdef-1bdd-48e5-b8af-fb7acf65312f)
