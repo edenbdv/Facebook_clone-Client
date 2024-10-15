@@ -8,6 +8,9 @@
 
 **Feed Page:**
 
+<img width="919" alt="Feed" src="https://github.com/user-attachments/assets/8117ee96-2e87-4c3b-8ef8-40cd53066e49">
+
+
 
 ![‏‏comment](https://github.com/user-attachments/assets/bc47bdef-1bdd-48e5-b8af-fb7acf65312f)
 
