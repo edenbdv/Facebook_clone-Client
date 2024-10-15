@@ -10,6 +10,8 @@ const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, username }) =>
     const [userData, setUserData] = useState(null); // State for user data
 
     const navigate = useNavigate();
+    const imageUrl = `data:image/jpeg;base64,${userProfilePicture}`;
+
 
     const toggleSearchVisibility = () => {
         setIsSearchVisible(!isSearchVisible);
@@ -41,6 +43,8 @@ const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, username }) =>
 
     const navigateToProfile = () => {
         if (userData) {
+
+            
             const profileUrl = `/profile/${userData.username}`; // Construct the profile URL with the username parameter
             navigate(profileUrl); // Navigate to the profile page with the username parameter in the URL
         }
@@ -76,7 +80,7 @@ const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, username }) =>
                             onClick={navigateToProfile}
                         >
                             <img
-                                src={userProfilePicture}
+                                src={imageUrl}
                                 alt="Profile Image"
                                 className="rounded-circle profile-image"
                             />

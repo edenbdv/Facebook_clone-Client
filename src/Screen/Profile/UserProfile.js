@@ -16,6 +16,7 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
     const [friendsList, setFriendsList] = useState([]); // State to store friends list
     const [showFriendRequests, setShowFriendRequests] = useState(false); // State for friend requests popup
     const navigate = useNavigate(); // Initialize navigate
+    
 
     useEffect(() => {
         const storedUserData = localStorage.getItem('userData');
@@ -104,6 +105,8 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
     }
 
     const { displayName, profilePic } = userData;
+    const imageUrl = `data:image/jpeg;base64,${profilePic}`;
+
 
     return (
         <div className="container mt-4">
@@ -114,7 +117,7 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
                     <div className="profile-container p-4 shadow rounded">
                         <div className="row align-items-center">
                             <div className="col-md-4 text-center">
-                                <img src={profilePic} alt="Profile" className="rounded-circle profile-picture" />
+                                <img src={imageUrl} alt="Profile" className="rounded-circle profile-picture" />
                             </div>
                             <div className="col-md-8">
                                 <h1>{displayName}</h1>
