@@ -30,7 +30,7 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
         if (userData && token) {
             fetchUserPosts(userData.username, token)
                 .then(posts => {
-                    console.log('Posts:', posts);
+                    //console.log('Posts:', posts);
                     setUserPosts(posts);
                 })
                 .catch(error => console.error('Error fetching user posts:', error));
@@ -40,19 +40,10 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
                 .then(friends => setFriendsList(friends))
                 .catch(error => console.error('Error fetching friends list:', error));
             //fetchFriendsList(userData.username, token, handleFriendsListSuccess, handleFriendsListError);        
-            console.log(userData.username + " " + userData.id);
         }
     }, [userData, token]);
 
-    // // Define the onSuccess and onError callbacks for fetching friends list
-    // const handleFriendsListSuccess = (friendsData) => {
-    //     setFriendsList(friendsData);
-    // };
 
-    // const handleFriendsListError = (error) => {
-    //     console.error('Error fetching friends list:', error);
-    //     // Handle error display or logging here
-    // };
     
     const openEditContainer = () => {
         setShowEditContainer(true);
@@ -156,6 +147,7 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
             {/* Friend list popup */}
             {showFriendList && (
                 <FriendListPopup
+                    token={token}
                     friends={friendsList|| []} // Pass the list of friends
                     handleClose={handleCloseFriendList} // Pass the close handler
                 />

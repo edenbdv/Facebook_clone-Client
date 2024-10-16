@@ -19,9 +19,7 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
     const [comments, setComments] = useState([]);
     const currentUser = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).username : null;
 
-    console.log("isoDate",isoDate)
     const date = new Date(isoDate);
-    console.log("date",date)
     const formattedDate = date.toLocaleString('en-US', {
         year: 'numeric',
         month: '2-digit',
@@ -31,7 +29,6 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
         second: '2-digit',
         hour12: false, 
       });
-    console.log("formatted",formattedDate)
 
 
     const handleEditClick = () => {

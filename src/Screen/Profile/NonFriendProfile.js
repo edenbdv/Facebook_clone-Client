@@ -21,7 +21,7 @@ const NonFriendProfile = ({ senderUser, username, token }) => {
             
             // Check if the response indicates success
             if (response.success) {
-                console.log('Friend request sent successfully');
+                //console.log('Friend request sent successfully');
                 setSuccessAlertVisible(true);
             } else {
                 console.error('Error sending friend request:', response.error);

@@ -48,7 +48,6 @@ function ConnectRight({ formToShow, setUsername, setToken  }) {
                 // If the request is successful, parse the response
                 const userData = await response.json();
                 localStorage.setItem('userData', JSON.stringify(userData));
-                console.log('User details:', userData);
             } else {
                 // Handle error if the request fails
                 console.error('Error fetching user details:', response.statusText);

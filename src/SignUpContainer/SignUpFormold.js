@@ -100,7 +100,6 @@ function SignupForm({ onSignup, usersData }) {
         if (Object.keys(errors).length === 0) {
 
             onSignup(formData);
-            console.log('User signed up:', formData);
             // Clear form data after successful registration
             // Clear form data after successful registration
             setFormData({

@@ -171,7 +171,6 @@ function SignupForm({ onSignup }) {
 
                 if (response.ok) { 
                     const userData = await response.json(); 
-                    console.log('User signed up:', userData); 
 
                     // Redirect to login page after successful signup
                     setSignupSuccess(true);

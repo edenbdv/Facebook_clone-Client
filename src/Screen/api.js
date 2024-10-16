@@ -2,7 +2,7 @@ const config = require('../config');
 
 export const fetchUserPosts = async (userId, token, setPosts) => {
     try {
-        console.log("TOKEN ", token);
+        //console.log("TOKEN ", token);
         const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/users/${userId}/posts`, {
             method: 'GET',
             headers: {
@@ -41,7 +41,7 @@ export const saveChanges = async (userId, editedUserData, token) => {
         if (!response.ok) {
             throw new Error('Failed to save changes');
         }
-        console.log(`Changes saved successfully for ${field}`);
+        //console.log(`Changes saved successfully for ${field}`);
     } catch (error) {
         console.error('Error saving changes:', error.message);
     }
@@ -61,7 +61,7 @@ export const fetchUserData = async (userId, token) => {
             if (response.ok) {
                 // If the request is successful, parse the response
                 const userData = await response.json();
-                console.log('User details:', userData);
+                //console.log('User details:', userData);
                 return userData;
             } else {
                 // Handle error if the request fails

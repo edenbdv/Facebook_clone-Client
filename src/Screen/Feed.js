@@ -54,7 +54,7 @@ const Feed = ({ posts, onDeletePost, onEditPost, token }) => {
   
   
 
-  console.log("in feed");
+  //console.log("in feed");
   //const PostsList = posts.map((post) => {
   return (
     <div>

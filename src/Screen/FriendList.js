@@ -1,7 +1,30 @@
-import React from 'react';
+import React ,{ useEffect, useState }  from 'react';
+import {fetchUserData} from './api'
 
-const FriendListPopup = ({ friends, handleClose }) => {
-    console.log("Friends:", friends); // Log the friends prop
+const FriendListPopup = ({ token, friends, handleClose }) => {
+
+    console.log("Friends:", friends); 
+    const [friendDetails, setFriendDetails] = useState([]);
+
+    useEffect(() => {
+        const fetchFriendsDetails = async () => {
+            const details = await Promise.all(
+                friends.map(async (friend) => {
+                    try {
+                        const friendInfo = await fetchUserData(friend, token);
+                        return friendInfo; 
+                    } catch (error) {
+                        console.error('Error fetching friend data:', error);
+                        return { profilePic: '', displayName: 'Unknown', id: friend };
+                    }
+                })
+            );
+            setFriendDetails(details);
+        };
+    
+        fetchFriendsDetails();
+    }, [friends, token]); // The effect runs when 'friends' or 'token' changes
+
 
     // Check if friends is null or undefined
     if (friends === null || friends.length === 0) {
@@ -19,10 +42,10 @@ const FriendListPopup = ({ friends, handleClose }) => {
         );
     }
 
-    // Check if friends is not an array
     if (!Array.isArray(friends)) {
-        return null; // Return null if friends is not an array
+        return null; 
     }
+
 
     // Render the list of friends
     return (
@@ -32,9 +55,13 @@ const FriendListPopup = ({ friends, handleClose }) => {
                     <button className="close-button" onClick={handleClose}>
                         <i className="bi bi-x-circle"></i>
                     </button>
-                    {friends.map((friend, index) => (
+                    {friendDetails.map((friend, index) => (
                         <div className="friend-item" key={index}>
-                            <img src={friend.profilePic} alt="Profile" className="profile-picture" />
+                            <img
+                                src={`data:image/jpeg;base64,${friend.profilePic}`} 
+                                alt="Profile"
+                                className="rounded-circle profile-image"
+                                />
                             <span className="display-name">{friend.displayName}</span>
                         </div>
                     ))}

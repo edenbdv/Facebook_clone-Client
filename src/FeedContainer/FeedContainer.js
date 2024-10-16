@@ -12,7 +12,7 @@ function FeedContainer({ token }) {
   const [userData, setUserData] = useState(null);
   const [posts, setPosts] = useState([]); // State to manage the list of posts
   const [nightMode, setNightMode] = useState(false); // State to track night mode
-  console.log("token in feedcontianer", token);
+  //console.log("token in feedcontianer", token);
 
   useEffect(() => {
     // Fetch posts for the current user
@@ -21,7 +21,7 @@ function FeedContainer({ token }) {
       // setUserData(JSON.parse(storedUserData));
       const parsedUserData = JSON.parse(storedUserData);
       setUserData(parsedUserData);
-      console.log("userData check:", parsedUserData);  // Log the userData to console
+      //console.log("userData check:", parsedUserData);  // Log the userData to console
 
     }
 
@@ -32,7 +32,7 @@ function FeedContainer({ token }) {
 
   const fetchPosts = async () => {
     try {
-      console.log("fetch posts token" + token);
+      //console.log("fetch posts token" + token);
         // Create the request object with the appropriate headers
       const request = new Request(`http://${config.server.ip}:${config.server.port}/api/posts`, {
           method: 'GET',
@@ -46,7 +46,7 @@ function FeedContainer({ token }) {
 
       if (response.ok) {
         const postData = await response.json();
-        console.log("Got Posts", postData);
+        //console.log("Got Posts", postData);
         setPosts(postData);
       } else {
         console.error('Error fetching posts:', response.statusText);
@@ -133,8 +133,8 @@ const editPost = async (postId, fieldName, newValue) => {
       body: JSON.stringify({ fieldName: fieldName, fieldValue: newValue }) // Dynamically set the field name and new value
     });
     if (response.ok) {
-      console.log("name", fieldName);
-      console.log("value", newValue);
+      //console.log("name", fieldName);
+      //console.log("value", newValue);
       // If the request was successful, reload the page to reflect the changes
       fetchPosts();
       fetchUserPosts(userData.username, token);

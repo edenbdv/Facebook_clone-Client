@@ -13,7 +13,6 @@ function ConnectRight({ formToShow, usersData, setUsersData,setUsername  }) {
     const renderForm = () => {
         switch (formToShow) {
             case 'login':
-                console.log('Sent to login from ConnectRight:', usersData);
                 return <LoginForm onLogin={handleLogin} usersData={usersData }  />;
             case 'signup':
                 return <SignupForm onSignup={handleSignup} usersData={usersData }  />;
