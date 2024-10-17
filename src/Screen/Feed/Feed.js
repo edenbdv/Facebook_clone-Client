@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import PostItem from '../Post/PostItem';
-import { fetchUserData } from './api';
+import PostItem from '../../Post/PostItem';
+import { fetchUserData } from '../api';
 
 const Feed = ({ posts, onDeletePost, onEditPost, token }) => {
 
   const [postsWithUserData, setPostsWithUserData] = useState([]);
 
   useEffect(() => {
-    console.log("token in feed", token);
+    //console.log("token in feed", token);
     const fetchPostsUserData = async () => {
       const postsWithUserData = await Promise.all(
         posts.map(async (post) => {
           try {
             const userData = await fetchUserData(post.createdBy, token);
-            console.log("fetched - posts user data");
-            console.log("USER DATA: ", userData)
+            // console.log("fetched - posts user data");
+            // console.log("USER DATA: ", userData)
             if (userData) {
               // Extract only displayName and profilePicture from userData
               const { displayName, profilePic } = userData;

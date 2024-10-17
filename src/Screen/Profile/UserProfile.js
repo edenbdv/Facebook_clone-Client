@@ -1,20 +1,22 @@
 // UserProfile.js
 import React, { useEffect, useState } from 'react';
 import './Profile.css';
-import Feed from '../Feed';
+import Feed from '../Feed/Feed';
 import EditProfilePopup from './EditProfilePopup';
-import FriendListPopup from '../FriendList'; // Import the FriendListPopup component
-import { useParams, useNavigate } from 'react-router-dom';
-import FRequestsPopup from '../FRequestsPopup';
-import { fetchUserPosts, fetchFriendsList, saveChanges, deleteUserProfile } from '../api';
+import FriendListPopup from '../FriendList'; 
+import { useNavigate } from 'react-router-dom';
+import FRequestsPopup from './FRequestsPopup';
+import { fetchUserData,fetchUserPosts, fetchFriendsList, saveChanges, deleteUserProfile } from '../api';
 
 const UserProfile = ({ token, onDelete, onEditPost }) => {
     const [userData, setUserData] = useState(null);
+    const [userDetails,setUserDetails] = useState(null);
     const [showEditContainer, setShowEditContainer] = useState(false);
-    const [showFriendList, setShowFriendList] = useState(false); // State to manage friend list popup
+    const [showFriendList, setShowFriendList] = useState(false); 
     const [userPosts, setUserPosts] = useState([]);
-    const [friendsList, setFriendsList] = useState([]); // State to store friends list
-    const [showFriendRequests, setShowFriendRequests] = useState(false); // State for friend requests popup
+    const [friendsList, setFriendsList] = useState([]); 
+
+    const [showFriendRequests, setShowFriendRequests] = useState(false); 
     const navigate = useNavigate(); // Initialize navigate
     
 
@@ -25,12 +27,41 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
         }
     }, []);
 
+
+    useEffect(() => {
+        const fetchUserDetails = async () => {
+           try {
+                const userInfo = await fetchUserData(userData.username, token);
+                 if (JSON.stringify(userInfo) !== JSON.stringify(userDetails)) {
+                    setUserDetails(userInfo);   
+                    console.log("userInfo",userDetails)
+                    console.log("friendRequests",userDetails.friendRequests)
+                 }
+                
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+              
+        };
+
+        if (userData && token) {
+            // Initial fetch
+            fetchUserDetails();
+    
+            // Polling every 30 seconds 
+            const interval = setInterval(fetchUserDetails, 30000);
+    
+            // Cleanup interval on component unmount
+            return () => clearInterval(interval);
+        }
+    }, [userData, token, userDetails]);
+
+
     useEffect(() => {
         // Fetch user posts when user data is available
         if (userData && token) {
             fetchUserPosts(userData.username, token)
                 .then(posts => {
-                    //console.log('Posts:', posts);
                     setUserPosts(posts);
                 })
                 .catch(error => console.error('Error fetching user posts:', error));
@@ -39,7 +70,6 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
             fetchFriendsList(userData.username, token)
                 .then(friends => setFriendsList(friends))
                 .catch(error => console.error('Error fetching friends list:', error));
-            //fetchFriendsList(userData.username, token, handleFriendsListSuccess, handleFriendsListError);        
         }
     }, [userData, token]);
 
@@ -154,9 +184,10 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
             )}
             {/* Friend requests popup */}
             {showFriendRequests && (
-                <FRequestsPopup handleClose={handleCloseFriendRequests}
+                <FRequestsPopup token = {token}
                                 currentUser = {userData.username}
-                                token = {token}
+                                friendreqs = {userDetails.friendRequests}
+                                handleClose={handleCloseFriendRequests}   
                 />
             )}
             {/* User posts */}

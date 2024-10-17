@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../Screen/NavBar';
 import Menu from '../Screen/Menu';
-import ThinkBox from '../Screen/ThinkBox';
-import Feed from '../Screen/Feed';
+import ThinkBox from '../Screen/Feed/ThinkBox';
+import Feed from '../Screen/Feed/Feed';
 import {fetchUserPosts} from '../Screen/api'
 import '../Screen/style.css'; // Import your CSS file
 const config = require('../config'); 
@@ -133,8 +133,6 @@ const editPost = async (postId, fieldName, newValue) => {
       body: JSON.stringify({ fieldName: fieldName, fieldValue: newValue }) // Dynamically set the field name and new value
     });
     if (response.ok) {
-      //console.log("name", fieldName);
-      //console.log("value", newValue);
       // If the request was successful, reload the page to reflect the changes
       fetchPosts();
       fetchUserPosts(userData.username, token);

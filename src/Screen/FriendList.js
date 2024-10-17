@@ -3,7 +3,6 @@ import {fetchUserData} from './api'
 
 const FriendListPopup = ({ token, friends, handleClose }) => {
 
-    console.log("Friends:", friends); 
     const [friendDetails, setFriendDetails] = useState([]);
 
     useEffect(() => {

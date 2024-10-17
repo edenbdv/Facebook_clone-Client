@@ -48,7 +48,6 @@ export const saveChanges = async (userId, editedUserData, token) => {
 };
 
 export const fetchUserData = async (userId, token) => {
-        console.log("fetch user TOKEN ", token)
         // Fetch updated user details
         try {
             // Make a GET request to fetch user details using the provided token
@@ -85,7 +84,6 @@ export const fetchFriendsList = async (userId, token) => {
         if (response.ok) {
             const friendsData = await response.json();
             return friendsData.friends;
-            //handleFriendsListSuccess(friendsArray);
         } else {
             console.error('Failed to fetch friends list:', response.statusText);
         }

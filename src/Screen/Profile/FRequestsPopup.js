@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { acceptFriendRequest, deleteFriendRequest } from './Request_api';
+import { acceptFriendRequest, deleteFriendRequest } from '../Request_api';
+import {fetchUserData} from '../api'
 
-const FRequestsPopup = ({ handleClose, currentUser, token }) => {
-    const [friendRequests, setFriendRequests] = useState([]);
+
+
+const FRequestsPopup = ({ token, currentUser, friendreqs, handleClose }) => {
+    const [friendReqDetails, setfriendReqDetails] = useState([]);
 
     const handleAcceptRequest = async (friendId) => {
         try {
@@ -24,13 +27,28 @@ const FRequestsPopup = ({ handleClose, currentUser, token }) => {
         }
     };
 
+   
     useEffect(() => {
-        // Retrieve friend requests from local storage
-        const storedRequests = localStorage.getItem('friendRequests');
-        if (storedRequests) {
-            setFriendRequests(JSON.parse(storedRequests));
-        }
-    }, []);
+        const fetchFriendReqsDetails = async () => {
+            const details = await Promise.all(
+                friendreqs.map(async (friendReq) => {
+                    try {
+                        const friendInfo = await fetchUserData(friendReq, token);
+                        return friendInfo; 
+                    } catch (error) {
+                        console.error('Error fetching friendReq data:', error);
+                        return { profilePic: '', displayName: 'Unknown', id: friendReq };
+                    }
+                })
+            );
+            setfriendReqDetails(details);
+        };
+    
+        fetchFriendReqsDetails();
+    }, [friendreqs, token]); // The effect runs when 'friends' or 'token' changes
+
+
+   
 
     return (
         <div className="popup-container">
@@ -41,11 +59,19 @@ const FRequestsPopup = ({ handleClose, currentUser, token }) => {
                     </button>
                     <div className="popup-inner">
                         <h2>Friend Requests</h2>
-                        {friendRequests.length > 0 ? (
+                        {friendReqDetails.length > 0 ? (
                             <ul>
-                                {friendRequests.map((request) => (
-                                <li key={request.id}>
-                                    {request.senderName}
+                                {friendReqDetails.map((request) => (
+                                <li key={request.userName}>
+                                    {request.userName}
+                                    <div className="friend-item">
+                                        <img
+                                            src={`data:image/jpeg;base64,${request.profilePic}`} 
+                                            alt="Profile"
+                                            className="rounded-circle profile-image"
+                                            />
+                                        <span className="display-name">{request.displayName}</span>
+                                    </div>
                                     <button onClick={() => handleAcceptRequest(request.senderId)}>Accept</button>
                                     <button onClick={() => handleDeleteRequest(request.senderId)}>Delete</button>
                                 </li>

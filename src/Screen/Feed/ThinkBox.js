@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './ThinkBox.css'; 
-import AddPost from '../Post/Add/AddPost'; 
+import AddPost from '../../Post/Add/AddPost'; 
 
 const ThinkBox = ({ addNewPost , proPic, authorName }) => {
     const [isPopupVisible, setPopupVisible] = useState(false);
