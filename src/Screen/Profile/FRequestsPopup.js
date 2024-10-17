@@ -4,30 +4,9 @@ import {fetchUserData} from '../api'
 
 
 
-const FRequestsPopup = ({ token, currentUser, friendreqs, handleClose }) => {
+const FRequestsPopup = ({ token, currentUser, friendreqs, handleClose, onHandleFriendRequest }) => {
     const [friendReqDetails, setfriendReqDetails] = useState([]);
 
-    const handleAcceptRequest = async (friendId) => {
-        try {
-            await acceptFriendRequest(currentUser.id, friendId, token);
-            // Handle the accepted request (e.g., remove it from the list)
-        } catch (error) {
-            console.error('Error accepting friend request:', error.message);
-            // Handle error display or logging here
-        }
-    };
-
-    const handleDeleteRequest = async (friendId) => {
-        try {
-            await deleteFriendRequest(currentUser.id, friendId, token);
-            // Handle the deleted request (e.g., remove it from the list)
-        } catch (error) {
-            console.error('Error deleting friend request:', error.message);
-            // Handle error display or logging here
-        }
-    };
-
-   
     useEffect(() => {
         const fetchFriendReqsDetails = async () => {
             const details = await Promise.all(
@@ -45,8 +24,34 @@ const FRequestsPopup = ({ token, currentUser, friendreqs, handleClose }) => {
         };
     
         fetchFriendReqsDetails();
-    }, [friendreqs, token]); // The effect runs when 'friends' or 'token' changes
+    }, [friendreqs, token]); 
 
+
+
+    const handleAcceptRequest = async (friendId) => {
+        try {
+            await acceptFriendRequest(currentUser, friendId, token);
+            // Handle the accepted request (e.g., remove it from the list)
+            // refreshFriendsList();
+            onHandleFriendRequest();
+        } catch (error) {
+            console.error('Error accepting friend request:', error.message);
+            // Handle error display or logging here
+        }
+    };
+
+    const handleDeleteRequest = async (friendId) => {
+        try {
+            await deleteFriendRequest(currentUser.id, friendId, token);
+            // Handle the deleted request (e.g., remove it from the list)
+            // refreshFriendsList();
+            onHandleFriendRequest();
+
+        } catch (error) {
+            console.error('Error deleting friend request:', error.message);
+            // Handle error display or logging here
+        }
+    };
 
    
 
@@ -61,21 +66,23 @@ const FRequestsPopup = ({ token, currentUser, friendreqs, handleClose }) => {
                         <h2>Friend Requests</h2>
                         {friendReqDetails.length > 0 ? (
                             <ul>
-                                {friendReqDetails.map((request) => (
-                                <li key={request.userName}>
-                                    {request.userName}
-                                    <div className="friend-item">
-                                        <img
-                                            src={`data:image/jpeg;base64,${request.profilePic}`} 
-                                            alt="Profile"
-                                            className="rounded-circle profile-image"
-                                            />
-                                        <span className="display-name">{request.displayName}</span>
-                                    </div>
-                                    <button onClick={() => handleAcceptRequest(request.senderId)}>Accept</button>
-                                    <button onClick={() => handleDeleteRequest(request.senderId)}>Delete</button>
-                                </li>
-                                ))}
+                                {friendReqDetails.map((request) => {
+                                    //  console.log('Friend Request:', request);
+
+                                        return (
+                                        <li key={request.username}>
+                                            <div className="friend-item">
+                                                <img
+                                                    src={`data:image/jpeg;base64,${request.profilePic}`} 
+                                                    alt="Profile"
+                                                    className="rounded-circle profile-image"
+                                                    />
+                                                <span className="display-name">{request.displayName}</span>
+                                            </div>
+                                            <button onClick={() => handleAcceptRequest(request.username)}>Accept</button>
+                                            <button onClick={() => handleDeleteRequest(request.username)}>Delete</button>
+                                        </li>
+                                     ) })}
                             </ul>
                         ) : (
                             <p>No friend requests</p>

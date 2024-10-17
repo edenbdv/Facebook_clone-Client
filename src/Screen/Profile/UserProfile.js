@@ -18,7 +18,25 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
 
     const [showFriendRequests, setShowFriendRequests] = useState(false); 
     const navigate = useNavigate(); // Initialize navigate
-    
+
+    const fetchUserDetails = async () => {
+        if (userData && token) {
+            try {
+                const userInfo = await fetchUserData(userData.username, token);
+                console.log("userInfo", userInfo);
+                const friends = await fetchFriendsList(userData.username, token);
+                setFriendsList(friends);
+                
+                // Check if userInfo is different from userDetails
+                if (JSON.stringify(userInfo) !== JSON.stringify(userDetails)) {
+                    setUserDetails(userInfo);
+                }
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        }
+    };
+
 
     useEffect(() => {
         const storedUserData = localStorage.getItem('userData');
@@ -29,32 +47,33 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
 
 
     useEffect(() => {
-        const fetchUserDetails = async () => {
-           try {
-                const userInfo = await fetchUserData(userData.username, token);
-                 if (JSON.stringify(userInfo) !== JSON.stringify(userDetails)) {
-                    setUserDetails(userInfo);   
-                    console.log("userInfo",userDetails)
-                    console.log("friendRequests",userDetails.friendRequests)
-                 }
-                
-            } catch (error) {
-                console.error('Error fetching user data:', error);
-            }
-              
-        };
+        fetchUserDetails();
+    }, [userData, token]); 
 
-        if (userData && token) {
-            // Initial fetch
-            fetchUserDetails();
-    
-            // Polling every 30 seconds 
-            const interval = setInterval(fetchUserDetails, 30000);
-    
-            // Cleanup interval on component unmount
-            return () => clearInterval(interval);
-        }
-    }, [userData, token, userDetails]);
+
+//     useEffect(() => {
+//         const fetchUserDetails = async () => {
+//            try {
+//                 const userInfo = await fetchUserData(userData.username, token);
+//                 console.log("userInfo",userDetails)
+
+//                  if (JSON.stringify(userInfo) !== JSON.stringify(userDetails)) {
+//                     setUserDetails(userInfo);  
+//                  }
+                
+//             } catch (error) {
+//                 console.error('Error fetching user data:', error);
+//             }
+            
+//         if (userData && token) {
+//             // Initial fetch
+//             fetchUserDetails();
+//             console.log("userDetails",userDetails)
+//         }
+  
+//     };
+//     fetchUserDetails();
+// }, [userData, token, userDetails]);
 
 
     useEffect(() => {
@@ -65,16 +84,28 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
                     setUserPosts(posts);
                 })
                 .catch(error => console.error('Error fetching user posts:', error));
-            
 
             fetchFriendsList(userData.username, token)
                 .then(friends => setFriendsList(friends))
                 .catch(error => console.error('Error fetching friends list:', error));
+
         }
     }, [userData, token]);
 
 
-    
+    // const refreshFriendsList = async () => {
+    //     if (userData && token) {
+    //         try {
+    //             const friends = await fetchFriendsList(userData.username, token);
+    //             setFriendsList(friends);
+
+    //         } catch (error) {
+    //             console.error('Error fetching friends list:', error);
+    //         }
+    //     }
+    // };
+
+
     const openEditContainer = () => {
         setShowEditContainer(true);
     };
@@ -85,7 +116,6 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
 
     const handleOpenFriendList = () => {
         setShowFriendList(true);
-        console.log("setShowFriendList: true");
     };
 
     const handleCloseFriendList = () => {
@@ -188,6 +218,9 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
                                 currentUser = {userData.username}
                                 friendreqs = {userDetails.friendRequests}
                                 handleClose={handleCloseFriendRequests}   
+                                // refreshFriendsList={refreshFriendsList}
+                                onHandleFriendRequest={fetchUserDetails} // Pass the callback
+
                 />
             )}
             {/* User posts */}
