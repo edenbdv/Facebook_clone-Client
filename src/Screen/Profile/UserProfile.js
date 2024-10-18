@@ -51,30 +51,6 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
     }, [userData, token]); 
 
 
-//     useEffect(() => {
-//         const fetchUserDetails = async () => {
-//            try {
-//                 const userInfo = await fetchUserData(userData.username, token);
-//                 console.log("userInfo",userDetails)
-
-//                  if (JSON.stringify(userInfo) !== JSON.stringify(userDetails)) {
-//                     setUserDetails(userInfo);  
-//                  }
-                
-//             } catch (error) {
-//                 console.error('Error fetching user data:', error);
-//             }
-            
-//         if (userData && token) {
-//             // Initial fetch
-//             fetchUserDetails();
-//             console.log("userDetails",userDetails)
-//         }
-  
-//     };
-//     fetchUserDetails();
-// }, [userData, token, userDetails]);
-
 
     useEffect(() => {
         // Fetch user posts when user data is available
@@ -92,18 +68,6 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
         }
     }, [userData, token]);
 
-
-    // const refreshFriendsList = async () => {
-    //     if (userData && token) {
-    //         try {
-    //             const friends = await fetchFriendsList(userData.username, token);
-    //             setFriendsList(friends);
-
-    //         } catch (error) {
-    //             console.error('Error fetching friends list:', error);
-    //         }
-    //     }
-    // };
 
 
     const openEditContainer = () => {
@@ -208,8 +172,8 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
             {showFriendList && (
                 <FriendListPopup
                     token={token}
-                    friends={friendsList|| []} // Pass the list of friends
-                    handleClose={handleCloseFriendList} // Pass the close handler
+                    friends={friendsList|| []} 
+                    handleClose={handleCloseFriendList} 
                 />
             )}
             {/* Friend requests popup */}
@@ -218,7 +182,6 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
                                 currentUser = {userData.username}
                                 friendreqs = {userDetails.friendRequests}
                                 handleClose={handleCloseFriendRequests}   
-                                // refreshFriendsList={refreshFriendsList}
                                 onHandleFriendRequest={fetchUserDetails} // Pass the callback
 
                 />
@@ -226,7 +189,6 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
             {/* User posts */}
             <div className="mt-4">
                 <h2>User Posts</h2>
-                {/* Check if userPosts is not null before passing it to Feed */}
                 <Feed posts={userPosts || []} onDeletePost={onDelete} onEditPost={onEditPost} token={token} />
             </div>
         </div>

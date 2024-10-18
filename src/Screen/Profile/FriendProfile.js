@@ -2,46 +2,18 @@
 import React, { useEffect, useState } from 'react';
 import './Profile.css';
 import Feed from '../Feed/Feed';
-import FriendListPopup from '../FriendList'; // Import the FriendListPopup component
-import { useParams, useNavigate } from 'react-router-dom';
+import FriendListPopup from '../FriendList'; 
+import { useNavigate } from 'react-router-dom';
 import { fetchUserData, fetchUserPosts, fetchFriendsList } from '../api';
 
-const FriendProfile = ({ username, token }) => {
-    const [friendData, setFriendData] = useState(null);
+const FriendProfile = ({ visitedUser, token }) => {
     const [friendPosts, setFriendPosts] = useState([]);
-    const [showFriendList, setShowFriendList] = useState(false); // State to manage friend list popup
-    const [friendsList, setFriendsList] = useState([]); // State to store friends list
-    const navigate = useNavigate(); // Initialize navigate
-
-    useEffect(() => {
-        // Fetch friend's data when the component mounts
-        fetchUserData(username, token)
-            .then(data => setFriendData(data))
-            .catch(error => console.error('Error fetching friend data:', error));
-            console.log("fetched friend data");
-
-        // Fetch friend's posts when the component mounts
-        fetchUserPosts(username, token)
-            .then(posts => setFriendPosts(posts))
-            .catch(error => console.error('Error fetching friend posts:', error));
-    
-        fetchFriendsList(username, token, handleFriendsListSuccess, handleFriendsListError);
-
-    }, [username, token]);
-
-    if (!friendData) {
-        return <div>Loading...</div>;
-    }
-
-    // Define the onSuccess and onError callbacks for fetching friends list
-    const handleFriendsListSuccess = (friendsData) => {
-        setFriendsList(friendsData);
-    };
-
-    const handleFriendsListError = (error) => {
-        console.error(error);
-        // Handle error display or logging here
-    };
+    const [showFriendList, setShowFriendList] = useState(false); 
+    const [friendsList, setFriendsList] = useState([]); 
+    const [userDetails,setUserDetails] = useState(null);
+    const [loading, setLoading] = useState(true);  
+    const [error, setError] = useState(null); 
+    const navigate = useNavigate(); 
 
     const handleOpenFriendList = () => {
         setShowFriendList(true);
@@ -50,9 +22,55 @@ const FriendProfile = ({ username, token }) => {
     const handleCloseFriendList = () => {
         setShowFriendList(false);
     };
+    console.log("visitedUser",visitedUser)
 
-    const { displayName, profilePic } = friendData;
-    const imageUrl = `data:image/jpeg;base64,${profilePic}`;
+
+    const fetchUserDetails = async () => {
+        if (visitedUser && token) {
+            try {
+                console.log("visitedUser",visitedUser)
+                const userInfo = await fetchUserData(visitedUser, token);
+                console.log("userInfo", userInfo);
+                const friends = await fetchFriendsList(visitedUser, token);
+                console.log("friends: ",friends)
+                setFriendsList(friends);
+                setUserDetails(userInfo);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+                setLoading(false);
+            }
+        }
+    };
+
+    useEffect(() => {
+        fetchUserDetails();
+    }, [token, visitedUser]);
+
+
+
+    useEffect(() => {
+        // Fetch friend's posts when the component mounts
+        fetchUserPosts(visitedUser, token)
+            .then(posts => setFriendPosts(posts))
+            .catch(error => console.error('Error fetching friend posts:', error));
+    
+        fetchFriendsList(visitedUser, token);
+
+    }, [visitedUser, token]);
+
+    if (loading) {
+        return <div>Loading...???</div>;
+
+    }
+
+    if (error) {
+        return <div>{error}</div>;  
+    }
+
+    const displayName = userDetails.displayName
+    const imageUrl = `data:image/jpeg;base64,${userDetails.profilePic}`;
+
 
 
     return (
@@ -83,15 +101,16 @@ const FriendProfile = ({ username, token }) => {
             {/* Friend list popup */}
             {showFriendList && (
                 <FriendListPopup
-                    friends={friendsList || []} // Pass the list of friends
-                    handleClose={handleCloseFriendList} // Pass the close handler
+                    token={token}
+                    friends={friendsList || []} 
+                    handleClose={handleCloseFriendList}
                 />
             )}
             {/* Friend posts */}
             <div className="mt-4">
                 <h2>Friend Posts</h2>
                 {/* Check if userPosts is not null before passing it to Feed */}
-                <Feed posts={friendPosts || []} />
+                <Feed posts={friendPosts || []} onDeletePost={null} onEditPost={null} token={token}/>
             </div>
         </div>
     );
