@@ -11,13 +11,9 @@ const Feed = ({ posts, onDeletePost, onEditPost, token }) => {
       const postsWithUserData = await Promise.all(
         posts.map(async (post) => {
           try {
-            console.log('Token being sent:', token);
 
             const userData = await fetchUserData(post.createdBy, token);
-            console.log("author",post.createdBy);
-
-            console.log("fetched - posts user data");
-            console.log("USER DATA: ", userData)
+           
             if (userData) {
               const { displayName, profilePic } = userData;
               // Create a new object with just displayName and profilePicture

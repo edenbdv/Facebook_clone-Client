@@ -24,27 +24,33 @@ export const fetchUserPosts = async (userId, token, setPosts) => {
     }
 };
 
-export const saveChanges = async (userId, editedUserData, token) => {
-    const { field, fieldValue } = editedUserData;
+export const saveChanges = async (userId, fieldName, fieldValue, token) => {
     try {
-        const fieldValue = editedUserData[field];
+
+        console.log("data to change: " ,fieldName ," - ", fieldValue )
+
         const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/users/${userId}`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json' 
             },
-            body: JSON.stringify({
-                [field]: fieldValue,
-            }),
+            body: JSON.stringify({ fieldName, fieldValue})
         });
+
+        
         if (!response.ok) {
             throw new Error('Failed to save changes');
         }
-        //console.log(`Changes saved successfully for ${field}`);
-    } catch (error) {
-        console.error('Error saving changes:', error.message);
-    }
+          // Parse the response and return it
+          const data = await response.json(); 
+          return { success: true, message: "Changes saved successfully", data }; 
+
+        } catch (error) {
+            console.error('Error saving changes:', error.message);
+            return { success: false, message: error.message }; 
+        } 
+  
 };
 
 export const fetchUserData = async (userId, token) => {

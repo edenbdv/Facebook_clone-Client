@@ -9,28 +9,38 @@ import FRequestsPopup from './FRequestsPopup';
 import { fetchUserData,fetchUserPosts, fetchFriendsList, saveChanges, deleteUserProfile } from '../api';
 
 const UserProfile = ({ token, onDelete, onEditPost }) => {
-    const [userData, setUserData] = useState(null);
     const [userDetails,setUserDetails] = useState(null);
     const [showEditContainer, setShowEditContainer] = useState(false);
     const [showFriendList, setShowFriendList] = useState(false); 
     const [userPosts, setUserPosts] = useState([]);
     const [friendsList, setFriendsList] = useState([]); 
-
     const [showFriendRequests, setShowFriendRequests] = useState(false); 
+
+    const [storedUserData, setStoredUserData] = useState(() => {
+        const data = localStorage.getItem('userData');
+        return data ? JSON.parse(data) : null;
+    });
+
     const navigate = useNavigate(); // Initialize navigate
 
     const fetchUserDetails = async () => {
-        if (userData && token) {
+        if (storedUserData && token) {
             try {
-                const userInfo = await fetchUserData(userData.username, token);
-                console.log("userInfo", userInfo);
-                const friends = await fetchFriendsList(userData.username, token);
+                const userInfo = await fetchUserData(storedUserData.username, token);
+                const friends = await fetchFriendsList(storedUserData.username, token);
+                setUserDetails(userInfo);
                 setFriendsList(friends);
                 
-                // Check if userInfo is different from userDetails
-                if (JSON.stringify(userInfo) !== JSON.stringify(userDetails)) {
-                    setUserDetails(userInfo);
-                }
+                console.log("userdata before: ",storedUserData)
+                console.log("userInfo(fetched):",userInfo)
+
+                // Update local storage with merged user data
+                const updatedUserData = { ...storedUserData, ...userInfo };
+                localStorage.setItem('userData', JSON.stringify(updatedUserData));
+                setStoredUserData(updatedUserData);
+
+                console.log("userdata after: ",updatedUserData)
+
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
@@ -39,34 +49,25 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
 
 
     useEffect(() => {
-        const storedUserData = localStorage.getItem('userData');
-        if (storedUserData) {
-            setUserData(JSON.parse(storedUserData));
-        }
-    }, []);
-
-
-    useEffect(() => {
-        fetchUserDetails();
-    }, [userData, token]); 
+            fetchUserDetails();
+    }, [storedUserData.username, token]);
 
 
 
     useEffect(() => {
-        // Fetch user posts when user data is available
-        if (userData && token) {
-            fetchUserPosts(userData.username, token)
+        if (storedUserData  && token) {
+            fetchUserPosts(storedUserData.username, token)
                 .then(posts => {
                     setUserPosts(posts);
                 })
                 .catch(error => console.error('Error fetching user posts:', error));
 
-            fetchFriendsList(userData.username, token)
+            fetchFriendsList(storedUserData.username, token)
                 .then(friends => setFriendsList(friends))
                 .catch(error => console.error('Error fetching friends list:', error));
 
         }
-    }, [userData, token]);
+    }, [storedUserData,token]);
 
 
 
@@ -89,37 +90,41 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
     const handleOpenFriendRequests = () => setShowFriendRequests(true);
     const handleCloseFriendRequests = () => setShowFriendRequests(false);
 
-    const handleSaveUserData = async (editedField, value) => {
+    const handleSaveUserData = async (fieldName, fieldValue) => {
         try {
-            await saveChanges(userData.username, { [editedField]: value }, token);
-            // If the save is successful, update the user data in the state
-            setUserData(prevUserData => ({
-                ...prevUserData,
-                [editedField]: value,
-            }));
-            console.log(`Changes saved successfully for ${editedField}`);
+            const response = await saveChanges(storedUserData.username, fieldName, fieldValue, token);
+            console.log(response.message)
+            if (response.success) {
+                console.log("True")
+                fetchUserDetails(); 
+                return true;
+            } else {
+                console.error("False"); 
+                return false;
+            }
+
+            // fetchUserDetails();
         } catch (error) {
             console.error('Error saving changes:', error.message);
-            // Handle error display or logging here
         }
     };
 
     const deleteProfile = async () => {
         try {
-            await deleteUserProfile(userData.username, token);
+            await deleteUserProfile(storedUserData.username, token);
             // If the delete request succeeds, navigate back to the feed page
             navigate('/');
         } catch (error) {
             console.error('Error deleting profile:', error.message);
-            // Handle error display or logging here
         }
     };
 
-    if (!userData) {
+    if (!storedUserData) {
         return <div>Loading...</div>;
     }
 
-    const { displayName, profilePic } = userData;
+    // const storedUserData = JSON.parse(localStorage.getItem('userData'));
+    const { displayName, profilePic } = storedUserData;
     const imageUrl = `data:image/jpeg;base64,${profilePic}`;
 
 
@@ -164,13 +169,13 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
                 <EditProfilePopup
                     handleClose={closeEditContainer}
                     handleSave={handleSaveUserData}
-                    editedUserData={userData}
-                    setEditedUserData={setUserData}
+                    // userData={userData}
                 />
             )}
             {/* Friend list popup */}
             {showFriendList && (
                 <FriendListPopup
+                    username = {storedUserData.username}
                     token={token}
                     friends={friendsList|| []} 
                     handleClose={handleCloseFriendList} 
@@ -179,10 +184,10 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
             {/* Friend requests popup */}
             {showFriendRequests && (
                 <FRequestsPopup token = {token}
-                                currentUser = {userData.username}
+                                currentUser = {storedUserData.username}
                                 friendreqs = {userDetails.friendRequests}
                                 handleClose={handleCloseFriendRequests}   
-                                onHandleFriendRequest={fetchUserDetails} // Pass the callback
+                                onHandleFriendRequest={fetchUserDetails} 
 
                 />
             )}

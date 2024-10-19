@@ -28,11 +28,11 @@ const FriendProfile = ({ visitedUser, token }) => {
     const fetchUserDetails = async () => {
         if (visitedUser && token) {
             try {
-                console.log("visitedUser",visitedUser)
+                // console.log("visitedUser",visitedUser)
                 const userInfo = await fetchUserData(visitedUser, token);
-                console.log("userInfo", userInfo);
+                // console.log("userInfo", userInfo);
                 const friends = await fetchFriendsList(visitedUser, token);
-                console.log("friends: ",friends)
+                // console.log("friends: ",friends)
                 setFriendsList(friends);
                 setUserDetails(userInfo);
                 setLoading(false);
