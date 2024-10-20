@@ -93,9 +93,9 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
     const handleSaveUserData = async (fieldName, fieldValue) => {
         try {
             const response = await saveChanges(storedUserData.username, fieldName, fieldValue, token);
-            console.log(response.message)
             if (response.success) {
                 console.log("True")
+              
                 fetchUserDetails(); 
                 return true;
             } else {

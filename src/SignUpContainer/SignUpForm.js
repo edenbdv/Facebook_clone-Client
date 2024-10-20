@@ -1,7 +1,6 @@
 // SignupForm.js
 import React, { useState } from 'react';
 import { Link ,useNavigate  } from 'react-router-dom';
-import { resizeFile } from 'react-image-file-resizer';
 import './SignUpForm.css';
 const config = require('../config'); 
 
@@ -72,16 +71,20 @@ function SignupForm({ onSignup }) {
                 const ctx = canvas.getContext('2d');
                 ctx.drawImage(img, 0, 0, width, height);
     
-                const base64String = canvas.toDataURL('image/jpeg'); // Convert to base64
+            // Save the base64 string without the prefix for backend saving
+            const base64WithoutPrefix  = canvas.toDataURL('image/jpeg').split(',')[1];  // Get base64 without prefix
+            
+            const base64WithPrefix = canvas.toDataURL('image/jpeg'); // base64 with data:image/jpeg;base64,
+
     
                 setFormData({
                     ...formData,
-                    profilePicture: base64String
+                    profilePicture: base64WithoutPrefix
                 });
     
                 // Set the image source directly
                 const previewImg = document.getElementById('profilePicturePreview');
-                previewImg.src = base64String;
+                previewImg.src = base64WithPrefix;
             };
         };
     
