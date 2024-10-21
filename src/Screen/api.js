@@ -1,6 +1,6 @@
 const config = require('../config');
 
-export const fetchUserPosts = async (userId, token, setPosts) => {
+export const fetchUserPosts = async (userId, token) => {
     try {
         //console.log("TOKEN ", token);
         const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/users/${userId}/posts`, {
@@ -13,7 +13,6 @@ export const fetchUserPosts = async (userId, token, setPosts) => {
         if (response.ok) {
             const userPostsData = await response.json();
             return userPostsData; // Return the posts
-            //setPosts(userPostsData);
         } else {
             console.error('Failed to fetch user posts:', response.statusText);
             return null;

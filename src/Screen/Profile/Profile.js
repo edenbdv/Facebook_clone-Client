@@ -1,6 +1,6 @@
  
 import React, { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import UserProfile from './UserProfile';
 import FriendProfile from './FriendProfile'; 
 import NonFriendProfile from './NonFriendProfile';
@@ -10,10 +10,7 @@ const Profile = ({ token }) => {
     const { username } = useParams(); 
     const [friendsList, setFriendsList] = useState([]);
     const currentUser = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).username : null;
-    const location = useLocation();
-
-    // Extract onDelete and onEditPost from location.state
-    const { onDelete, onEditPost } = location.state || {};
+  
 
     useEffect(() => {
         // Fetch the list of friends for the current user
@@ -43,7 +40,7 @@ const Profile = ({ token }) => {
                 <NonFriendProfile  visitedUser={username}  token={token} />
             ) : (
                 // Render UserProfile if username doesn't exist or is the same as the current user
-                <UserProfile token={token} onDelete={onDelete} onEditPost={onEditPost} />
+                <UserProfile token={token} />
             )
         )}
         </div>

@@ -1,14 +1,15 @@
 // UserProfile.js
 import React, { useEffect, useState } from 'react';
 import './Profile.css';
-import Feed from '../Feed/Feed';
+// import Feed from '../Feed/Feed';
+import UserFeed from './UserFeed';
 import EditProfilePopup from './EditProfilePopup';
 import FriendListPopup from '../FriendList'; 
 import { useNavigate } from 'react-router-dom';
 import FRequestsPopup from './FRequestsPopup';
 import { fetchUserData,fetchUserPosts, fetchFriendsList, saveChanges, deleteUserProfile } from '../api';
 
-const UserProfile = ({ token, onDelete, onEditPost }) => {
+const UserProfile = ({ token }) => {
     const [userDetails,setUserDetails] = useState(null);
     const [showEditContainer, setShowEditContainer] = useState(false);
     const [showFriendList, setShowFriendList] = useState(false); 
@@ -194,7 +195,7 @@ const UserProfile = ({ token, onDelete, onEditPost }) => {
             {/* User posts */}
             <div className="mt-4">
                 <h2>User Posts</h2>
-                <Feed posts={userPosts || []} onDeletePost={onDelete} onEditPost={onEditPost} token={token} />
+                <UserFeed posts={userPosts || []}  token={token} />
             </div>
         </div>
     );
