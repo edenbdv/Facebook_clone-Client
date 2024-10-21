@@ -31,8 +31,6 @@ const FRequestsPopup = ({ token, currentUser, friendreqs, handleClose, onHandleF
     const handleAcceptRequest = async (friendId) => {
         try {
             await acceptFriendRequest(currentUser, friendId, token);
-            // Handle the accepted request (e.g., remove it from the list)
-            // refreshFriendsList();
             onHandleFriendRequest();
         } catch (error) {
             console.error('Error accepting friend request:', error.message);
@@ -43,8 +41,6 @@ const FRequestsPopup = ({ token, currentUser, friendreqs, handleClose, onHandleF
     const handleDeleteRequest = async (friendId) => {
         try {
             await deleteFriendRequest(currentUser.id, friendId, token);
-            // Handle the deleted request (e.g., remove it from the list)
-            // refreshFriendsList();
             onHandleFriendRequest();
 
         } catch (error) {

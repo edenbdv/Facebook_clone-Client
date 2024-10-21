@@ -2,11 +2,10 @@
 import './EditPostForm.css'
 import React, { useState, useEffect, useRef } from 'react';
 
-const EditPostForm = ({ initialText, initialPicture, onSave, onCancel, onEditPost, onSavePicture }) => {
+const EditPostForm = ({ initialText, onSave, onCancel, onEditPost }) => {
   const [editedText, setEditedText] = useState(initialText);
-  const [editedPicture, setEditedPicture] = useState(initialPicture);
   const textAreaRef = useRef(null);
-  const fileInputRef = useRef(null);
+  // const fileInputRef = useRef(null);
 
   
   useEffect(() => {
@@ -18,17 +17,9 @@ const EditPostForm = ({ initialText, initialPicture, onSave, onCancel, onEditPos
     setEditedText(e.target.value);
   };
 
-  const handlePictureChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setEditedPicture(URL.createObjectURL(file));
-    }
-  };
-
  
   const handleSave = () => {
-    //onSave(); // Call onSave without passing any arguments
-    onSave(editedText, editedPicture);
+    onSave(editedText);
   };
   
 
@@ -46,13 +37,6 @@ const EditPostForm = ({ initialText, initialPicture, onSave, onCancel, onEditPos
             ref={textAreaRef} // Assign the ref to the textarea
             value={editedText}
             onChange={handleTextChange} />
-            <input
-              type="file"
-              accept="image/*"
-              className="form-control mt-2"
-              ref={fileInputRef}
-              onChange={handlePictureChange}
-            />
           <div className="button-container">
             <button
               className="btn btn-primary mt-2"

@@ -130,7 +130,7 @@ const editPost = async (postId, fieldName, newValue) => {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ fieldName: fieldName, fieldValue: newValue }) // Dynamically set the field name and new value
+      body: JSON.stringify({ fieldName: fieldName, fieldValue: newValue }) 
     });
     if (response.ok) {
       // If the request was successful, reload the page to reflect the changes
