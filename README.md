@@ -8,7 +8,7 @@
 
 **Feed Page:**
 
-<img width="919" alt="Feed" src="https://github.com/user-attachments/assets/8117ee96-2e87-4c3b-8ef8-40cd53066e49">
+![image](https://github.com/user-attachments/assets/6adb27e0-9298-47ae-bc19-b2e0b283d808)
 
 
 "Foobar" is a social networking application similar to Facebook, designed to connect people and support sharing of updates and photos.
