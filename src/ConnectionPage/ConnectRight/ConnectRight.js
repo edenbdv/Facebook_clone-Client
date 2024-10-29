@@ -61,15 +61,13 @@ function ConnectRight({ formToShow, setUsername, setToken  }) {
     };
     
 
-
+ /*d-flex justify-content-center align-items-center vh-100*/
     return (
-        <div className="d-flex justify-content-center align-items-center vh-100">
-            <div className=" card">
+            <div className="card card-connect">
                 <div className="card-body">
                     {renderForm()}
                 </div>
             </div>
-        </div>
     );
 }
 
