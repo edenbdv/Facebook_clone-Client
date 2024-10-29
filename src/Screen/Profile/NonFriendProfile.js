@@ -1,37 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { fetchUserData, sendFriendRequest } from './api'; // Import functions to fetch user data and send friend request
+import { fetchUserData, sendFriendRequest } from '../api'; 
 
-const NonFriendProfile = ({ senderUser, username, token }) => {
+const NonFriendProfile = ({ visitedUser, token }) => {
     const [userData, setUserData] = useState(null);
     const [successAlertVisible, setSuccessAlertVisible] = useState(false);
     const [errorAlertVisible, setErrorAlertVisible] = useState(false);
 
     useEffect(() => {
         // Fetch user data when the component mounts
-        fetchUserData(username, token)
+        fetchUserData(visitedUser, token)
             .then(data => setUserData(data))
             .catch(error => console.error('Error fetching non friend data:', error));
-    }, [username, token]);
+    }, [visitedUser, token]);
 
     // Function to handle sending a friend request
     const handleSendFriendRequest = async () => {
         try {
-            // Send friend request and wait for response
-            const response = await sendFriendRequest(username, token);
+            const response = await sendFriendRequest(visitedUser, token);
             
-            // Check if the response indicates success
             if (response.success) {
-                console.log('Friend request sent successfully');
                 setSuccessAlertVisible(true);
             } else {
                 console.error('Error sending friend request:', response.error);
                 setErrorAlertVisible(true);
-                // Optionally, you can update the UI or show a message to indicate that the request was not sent successfully
             }
         } catch (error) {
             console.error('Error sending friend request:', error.message);
             setErrorAlertVisible(true);
-            // Handle error display or logging here
         }
     };
 
@@ -40,6 +35,8 @@ const NonFriendProfile = ({ senderUser, username, token }) => {
     }
 
     const { displayName, profilePic } = userData;
+    const imageUrl = `data:image/jpeg;base64,${profilePic}`;
+
 
     return (
         <div className="container mt-4">
@@ -49,7 +46,7 @@ const NonFriendProfile = ({ senderUser, username, token }) => {
                     <div className="profile-container p-4 shadow rounded">
                         <div className="row align-items-center">
                             <div className="col-md-4 text-center">
-                                <img src={profilePic} alt="Profile" className="rounded-circle profile-picture" />
+                                <img src={imageUrl} alt="Profile" className="rounded-circle profile-picture" />
                             </div>
                             <div className="col-md-8">
                                 <h1>{displayName}</h1>

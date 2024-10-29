@@ -5,10 +5,7 @@ import Navbar from './NavBar';
 import Menu from './Menu';
 import ThinkBox from './ThinkBox';
 import Posts from '../Post/Posts';
-import AddPost from '../Post/Add/AddPost';
 import Feed from './Feed';
-import PostItem from '../Post/PostItem';
-import EditPost from '../Post/Edit/EditPost'; // Import the EditPost component
 import './style.css'; // Import your CSS file
 
 function App() {

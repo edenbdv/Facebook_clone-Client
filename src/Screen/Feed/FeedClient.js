@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import PostItem from '../Post/PostItem';
+import PostItem from '../../Post/PostItem';
 
 const Feed = ({ currentUser }) => {
   const [posts, setPosts] = useState([]);

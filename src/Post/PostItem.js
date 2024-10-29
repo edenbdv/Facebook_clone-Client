@@ -2,23 +2,31 @@ import './PostItem.css'; // Import the CSS file
 import LikeButton from '../PostButtons/LikeButton';
 import ShareButton from '../PostButtons/ShareButton';
 import CommentButton from '../PostButtons/Comment/CommentButton';
-import Comment from '../PostButtons/Comment/Comment';
+// import Comment from '../PostButtons/Comment/Comment';
 import CommentPopUp from '../PostButtons/Comment/CommentPopUp';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import EditPost from './Edit/EditPost';
 import EditPostForm from './Edit/EditPostForm'; // Import the EditPostForm component
 import DeletePost from './Delete/DeletePost';
 
-function PostItem({ _id, text, picture, authorP, authorN, date, username, onDelete, onEditPost }) {
-
+function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onDelete, onEditPost }) {
     const [editing, setEditing] = useState(false);
     const [liked, setLiked] = useState(false);
-    const [editedText, setEditedText] = useState(text); // Define editedText
-    const [editedPicture, setEditedPicture] = useState(picture); // Define editedPicture
     const [showComments, setShowComments] = useState(false);
     const [comments, setComments] = useState([]);
     const currentUser = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).username : null;
+
+    const date = new Date(isoDate);
+    const formattedDate = date.toLocaleString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false, 
+      });
 
 
     const handleEditClick = () => {
@@ -29,9 +37,8 @@ function PostItem({ _id, text, picture, authorP, authorN, date, username, onDele
         setEditing(false);
     };
 
-    const handleSaveEdit = (editedText, editedPicture) => {
-        onSaveText(editedText); // Save edited text
-        //onSavePicture(editedPicture); // Save edited picture
+    const handleSaveEdit = (editedText) => {
+        onSaveText(editedText);
         setEditing(false);
     };
 
@@ -40,9 +47,6 @@ function PostItem({ _id, text, picture, authorP, authorN, date, username, onDele
         onEditPost('text', editedText);
     };
 
-    const onSavePicture = (editedPicture) => {
-        onEditPost('picture', editedPicture);; // Update the picture in the state
-    };
 
     const toggleComments = () => {
         setShowComments(!showComments);
@@ -94,10 +98,7 @@ function PostItem({ _id, text, picture, authorP, authorN, date, username, onDele
                         <img src={authorP} className="rounded-circle me-2" alt="Author" style={{ width: '40px', height: '40px' }} />
                         <span className="author-name">{authorN}</span>
                     </Link>
-                        {/* <Link to={`/profile/${username}`} className="author-link">
-                            <img src={authorP} className="rounded-circle me-2" alt="Author" style={{ width: '40px', height: '40px' }} />
-                            <span className="author-name">{authorN}</span>
-                        </Link> */}
+                      
                     </div>
                     <div className="d-flex align-items-between">
                         {/* Edit and Delete buttons */}
@@ -106,11 +107,9 @@ function PostItem({ _id, text, picture, authorP, authorN, date, username, onDele
                                 {editing ? (
                                     <EditPostForm
                                         initialText={text}
-                                        initialPicture={picture} // Pass the initial picture URL
                                         onSave={handleSaveEdit}
                                         onCancel={handleCancelEdit}
-                                        onEditPost={onEditPost} // Pass down the onEditPost function
-                                        onSavePicture={onSavePicture}
+                                        onEditPost={onEditPost} 
                                     />
                                 ) : (
 
@@ -119,7 +118,7 @@ function PostItem({ _id, text, picture, authorP, authorN, date, username, onDele
                                 <DeletePost onDeletePost={DeletePost} onClick={handleDeleteClick} />
                             </div>
                         )}
-                        <div className="text-muted ml-2">{date}</div>
+                        <div className="text-muted ml-2">{formattedDate}</div>
                     </div>
                 </div>
 

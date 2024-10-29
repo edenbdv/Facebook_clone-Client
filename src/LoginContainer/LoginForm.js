@@ -1,5 +1,5 @@
-import React, { useState } from 'react'; // Import useState from React
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import React, { useState } from 'react'; 
+import { Link } from 'react-router-dom'; 
 import './LoginForm.css';
 const config = require('../config'); 
 
@@ -48,7 +48,7 @@ function LoginForm({ onLogin }) {
     
                 // Pass the token forward to upper classes
                 onLogin(formData.username, token);
-                console.log('User logged in:', formData.username);
+                //console.log('User logged in:', formData.username);
                 // After successful login
             } else {
                 const errorData = await response.json();

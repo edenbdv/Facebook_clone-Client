@@ -1,8 +1,8 @@
 const config = require('../config');
 
-export const fetchUserPosts = async (userId, token, setPosts) => {
+export const fetchUserPosts = async (userId, token) => {
     try {
-        console.log("TOKEN ", token);
+        //console.log("TOKEN ", token);
         const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/users/${userId}/posts`, {
             method: 'GET',
             headers: {
@@ -13,7 +13,6 @@ export const fetchUserPosts = async (userId, token, setPosts) => {
         if (response.ok) {
             const userPostsData = await response.json();
             return userPostsData; // Return the posts
-            //setPosts(userPostsData);
         } else {
             console.error('Failed to fetch user posts:', response.statusText);
             return null;
@@ -24,31 +23,36 @@ export const fetchUserPosts = async (userId, token, setPosts) => {
     }
 };
 
-export const saveChanges = async (userId, editedUserData, token) => {
-    const { field, fieldValue } = editedUserData;
+export const saveChanges = async (userId, fieldName, fieldValue, token) => {
     try {
-        const fieldValue = editedUserData[field];
+
+        console.log("data to change: " ,fieldName ," - ", fieldValue )
+
         const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/users/${userId}`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json' 
             },
-            body: JSON.stringify({
-                [field]: fieldValue,
-            }),
+            body: JSON.stringify({ fieldName, fieldValue})
         });
+
+        
         if (!response.ok) {
             throw new Error('Failed to save changes');
         }
-        console.log(`Changes saved successfully for ${field}`);
-    } catch (error) {
-        console.error('Error saving changes:', error.message);
-    }
+          // Parse the response and return it
+          const data = await response.json(); 
+          return { success: true, message: "Changes saved successfully", data }; 
+
+        } catch (error) {
+            console.error('Error saving changes:', error.message);
+            return { success: false, message: error.message }; 
+        } 
+  
 };
 
 export const fetchUserData = async (userId, token) => {
-        console.log("fetch user TOKEN ", token)
         // Fetch updated user details
         try {
             // Make a GET request to fetch user details using the provided token
@@ -61,7 +65,7 @@ export const fetchUserData = async (userId, token) => {
             if (response.ok) {
                 // If the request is successful, parse the response
                 const userData = await response.json();
-                console.log('User details:', userData);
+                //console.log('User details:', userData);
                 return userData;
             } else {
                 // Handle error if the request fails
@@ -85,7 +89,6 @@ export const fetchFriendsList = async (userId, token) => {
         if (response.ok) {
             const friendsData = await response.json();
             return friendsData.friends;
-            //handleFriendsListSuccess(friendsArray);
         } else {
             console.error('Failed to fetch friends list:', response.statusText);
         }

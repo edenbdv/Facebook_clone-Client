@@ -12,13 +12,15 @@ const Menu = ({ proPic, username }) => {
         navigate(`/profile/${username}`)
     };
 
+    const imageUrl = `data:image/jpeg;base64,${proPic}`;
+
     return (
         <div className="menu-container">
         <ul class="list-group">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
             <li className="list-group-item" onClick={navigateToProfile}>
                 <img
-                    src={proPic}
+                    src={imageUrl}
                     alt="Profile Image"
                     className="rounded-circle profile-image"
                 />
