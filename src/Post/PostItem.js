@@ -77,7 +77,7 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
     };
 
     return (
-<div className="card-container">
+<div className=" card-container">
         <div className="card mb-3" >
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
                 <div className="card-header d-flex justify-content-between align-items-center">
@@ -112,7 +112,7 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
                                 <DeletePost onDeletePost={DeletePost} onClick={handleDeleteClick} />
                             </div>
                         )}
-                        <div className="card-date ml-2" >
+                        <div className="card-date  mt-2 ml-2" >
                                 {formattedDate}
                         </div>
                     </div>

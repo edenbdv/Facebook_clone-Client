@@ -181,7 +181,7 @@ return (
         </div>
 
     
-      <div className="col-12 col-md-9 d-flex flex-column">
+      <div className="col-12 col-md-9 col-lg-9 col-xl-6 d-flex flex-column">
             <ThinkBox
               addNewPost={addNewPost}
               proPic={userData ? userData.profilePic : ''}

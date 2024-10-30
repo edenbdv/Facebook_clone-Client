@@ -28,7 +28,7 @@
 .card-header {
     margin: 1rem 0;
     background-color: transparent;
-    font-size: 16px; 
+    font-size: 13px; 
 }
 
 
@@ -61,12 +61,12 @@
 
 @media (max-width: 576px) { 
     .card-header {
-        font-size: 13px; 
+        font-size: 10px; 
 
     }
 
     .author-name {
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-weight: bold;
     }
 }

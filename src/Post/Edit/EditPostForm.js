@@ -2,7 +2,7 @@
 import './EditPostForm.css'
 import React, { useState, useEffect, useRef } from 'react';
 
-const EditPostForm = ({ initialText, onSave, onCancel, onEditPost }) => {
+const EditPostForm = ({ initialText, onSave, onCancel }) => {
   const [editedText, setEditedText] = useState(initialText);
   const textAreaRef = useRef(null);
 
