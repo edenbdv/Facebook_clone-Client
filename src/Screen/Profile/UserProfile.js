@@ -135,20 +135,16 @@ const UserProfile = ({ token }) => {
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
             {/* Profile header */}
             <div className="row justify-content-center">
-                <div className="col-md-8">
-                    <div className="profile-container p-4 shadow rounded">
-                        <div className="row align-items-center">
-                            <div className="col-md-4 text-center">
+                <div className="col-md-9">
+                    <div className="profile-container d-flex align-items-center justify-content-between p-4 shadow rounded">
+                         <div className="d-flex align-items-center">
                                 <img src={imageUrl} alt="Profile" className="rounded-circle profile-picture" />
-                            </div>
-                            <div className="col-md-8">
                                 <h1>{displayName}</h1>
-                            </div>
                         </div>
                     </div>
                 </div>
                 {/* Edit profile button */}
-                <div className="col-md-4 ">
+                <div className="col-md-3 ">
                     <div className="d-flex flex-column justify-content-end align-items-center">
                         <button className=" btn btn-outline-secondary text-start w-100 btn-edit" onClick={openEditContainer}>
                             <i className="bi bi-pencil "></i> Edit Profile

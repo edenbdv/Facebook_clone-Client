@@ -63,7 +63,7 @@ const Navbar = ({ toggleNightMode, nightMode, userProfilePicture }) => {
                     <form className="d-none d-md-flex">
                         {/* Search input */}
                         <input
-                            className="form-control me-2"
+                            className=" form-control me-2"
                             type="search"
                             placeholder="Search in FooBar"
                             aria-label="Search" />
