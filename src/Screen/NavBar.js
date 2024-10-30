@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Popover } from 'bootstrap';
 
 
-const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, username }) => {
+const Navbar = ({ toggleNightMode, nightMode, userProfilePicture }) => {
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [userData, setUserData] = useState(null); 
 
@@ -60,7 +60,7 @@ const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, username }) =>
                         <img src="/logo2.svg" alt="Logo" height="55" />
                     </a>
 
-                    <form className="d-flex">
+                    <form className="d-none d-md-flex">
                         {/* Search input */}
                         <input
                             className="form-control me-2"

@@ -23,7 +23,6 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
         day: '2-digit',
         hour: '2-digit',
         minute: '2-digit',
-        second: '2-digit',
         hour12: false, 
       });
 
@@ -79,7 +78,7 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
 
     return (
 <div className="card-container">
-        <div className="card mb-3" style={{ width: '50rem' }}>
+        <div className="card mb-3" >
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
                 <div className="card-header d-flex justify-content-between align-items-center">
                     <div className="d-flex align-items-center justify-content-center">
@@ -128,9 +127,15 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
                     </div>
                 )}
                 <div className="card-footer d-flex justify-content-between align-items-center">
+                <div className="col-4 d-flex justify-content-center">
                     <LikeButton liked={liked} handleLikeClick={handleLikeClick} />
+                </div>
+                <div className="col-4 d-flex justify-content-center">
                     <CommentButton onClick={toggleComments} />
+                </div>
+                <div className="col-4 d-flex justify-content-center">
                     <ShareButton />
+                </div>
                 </div>
             </div>
             {showComments && <CommentPopUp

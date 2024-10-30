@@ -162,15 +162,16 @@ const toggleNightMode = () => {
 return (
   <div className={`app-container ${nightMode ? 'night-mode' : ''}`}>
     
-  
       <Navbar toggleNightMode={toggleNightMode}
-        nightMode={nightMode}
-        userProfilePicture={userData ? userData.profilePic : ''}
-        userDisplayName={userData ? userData.displayName : ''}
-      />
+          nightMode={nightMode}
+          userProfilePicture={userData ? userData.profilePic : ''}
+          userDisplayName={userData ? userData.displayName : ''}
+        />
+     
+     
     
 
-    <div className="container-fluid">
+    <div className="container-fluid ">
       <div className="row">
         <div className="col-md-3 d-none d-md-block">
           <Menu
@@ -179,6 +180,7 @@ return (
             />
         </div>
 
+    
       <div className="col-12 col-md-9 d-flex flex-column">
             <ThinkBox
               addNewPost={addNewPost}
