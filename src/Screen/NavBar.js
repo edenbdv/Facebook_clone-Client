@@ -1,5 +1,5 @@
 // Navbar.js
-import './NavBar.css'; // Import the CSS file
+import './NavBar.css'; 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Popover } from 'bootstrap';
@@ -7,7 +7,7 @@ import { Popover } from 'bootstrap';
 
 const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, username }) => {
     const [isSearchVisible, setIsSearchVisible] = useState(false);
-    const [userData, setUserData] = useState(null); // State for user data
+    const [userData, setUserData] = useState(null); 
 
     const navigate = useNavigate();
     const imageUrl = `data:image/jpeg;base64,${userProfilePicture}`;
@@ -26,7 +26,7 @@ const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, username }) =>
         return () => {
             popoverList.forEach(popover => popover.dispose()); // Dispose popover when component unmounts
         };
-    }, []); // Empty dependency array ensures this effect runs only once after initial render
+    }, []); 
 
     useEffect(() => {
         // Fetch user data from local storage when component mounts
@@ -46,13 +46,12 @@ const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, username }) =>
 
             
             const profileUrl = `/profile/${userData.username}`; // Construct the profile URL with the username parameter
-            navigate(profileUrl); // Navigate to the profile page with the username parameter in the URL
+            navigate(profileUrl);
         }
-        //navigate('/profile'); 
     };
 
     return (
-        <nav className="navbar navbar-expand-lg sticky-top">
+        <nav className={`navbar navbar-expand-lg sticky-top ${nightMode ? 'night-mode' : ''}`}>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
             <div className="container-fluid d-flex justify-content-between align-items-center">
                 {/* Wrapper div for search bar and logo */}
@@ -103,8 +102,8 @@ const Navbar = ({ toggleNightMode, nightMode, userProfilePicture, username }) =>
                     {/* Logout button */}
                     <button
                         type="button"
-                        className="btn btn-secondary-outline"
-                        onClick={handleLogout} // Logout function
+                        className={`btn btn-secondary-outline btn-logout`}
+                        onClick={handleLogout} 
                     >
                         Logout
                     </button>

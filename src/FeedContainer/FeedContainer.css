@@ -1,0 +1,16 @@
+/*FeedContainer.css*/
+
+.app-container {
+  padding-top: 1rem; /
+}
+
+
+
+@media (max-width: 768px) {
+    .menu-container {
+      display: none;
+    }
+  }
+
+  
+  

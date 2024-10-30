@@ -4,25 +4,22 @@ import Menu from '../Screen/Menu';
 import ThinkBox from '../Screen/Feed/ThinkBox';
 import Feed from '../Screen/Feed/Feed';
 import {fetchUserPosts} from '../Screen/api'
-import '../Screen/style.css'; // Import your CSS file
+import '../Screen/style.css'; 
 const config = require('../config'); 
 
 function FeedContainer({ token }) {
 
   const [userData, setUserData] = useState(null);
-  const [posts, setPosts] = useState([]); // State to manage the list of posts
-  const [nightMode, setNightMode] = useState(false); // State to track night mode
-  //console.log("token in feedcontianer", token);
+  const [posts, setPosts] = useState([]); 
+  const [nightMode, setNightMode] = useState(false); 
+
 
   useEffect(() => {
     // Fetch posts for the current user
     const storedUserData = localStorage.getItem('userData');
     if (storedUserData) {
-      // setUserData(JSON.parse(storedUserData));
       const parsedUserData = JSON.parse(storedUserData);
       setUserData(parsedUserData);
-      //console.log("userData check:", parsedUserData);  // Log the userData to console
-
     }
 
     if (token) {
@@ -32,8 +29,6 @@ function FeedContainer({ token }) {
 
   const fetchPosts = async () => {
     try {
-      //console.log("fetch posts token" + token);
-        // Create the request object with the appropriate headers
       const request = new Request(`http://${config.server.ip}:${config.server.port}/api/posts`, {
           method: 'GET',
           headers: {
@@ -41,12 +36,10 @@ function FeedContainer({ token }) {
           }
       });
 
-      // Send the request
       const response = await fetch(request);
 
       if (response.ok) {
         const postData = await response.json();
-        //console.log("Got Posts", postData);
         setPosts(postData);
       } else {
         console.error('Error fetching posts:', response.statusText);
@@ -74,28 +67,26 @@ const addNewPost = async (text, picture) => {
       setPosts([createdPost, ...posts]);
     } else {
       if (response.status === 403) {
-        // Post not allowed, raise a Bootstrap notification
+        // Post not allowed
         const alert = document.createElement('div');
         alert.className = 'alert alert-danger';
         alert.setAttribute('role', 'alert');
         alert.innerText = 'Sorry, your post is not allowed.';
         
-        // Append the alert to a suitable location in your DOM
+        // Append the alert 
         const container = document.getElementById('notification-container');
         container.appendChild(alert);
         
-        // Remove the alert after a certain duration (optional)
+        // Remove the alert 
         setTimeout(() => {
           container.removeChild(alert);
         }, 5000); // Remove after 5 seconds
       } else {
         console.error('Error adding post:', response.statusText);
-        // Handle other error cases
       }
     }
   } catch (error) {
     console.error('Error adding post:', error);
-    // Handle network errors
   }
 };
 
@@ -138,23 +129,22 @@ const editPost = async (postId, fieldName, newValue) => {
       fetchUserPosts(userData.username, token);
     } else {
       if (response.status === 403) {
-        // Post editing not allowed, raise a Bootstrap notification
+        // Post editing not allowed
         const alert = document.createElement('div');
         alert.className = 'alert alert-danger';
         alert.setAttribute('role', 'alert');
         alert.innerText = 'Sorry, you are not allowed to edit this post.';
         
-        // Append the alert to a suitable location in your DOM
+        // Append the alert 
         const container = document.getElementById('notification-container');
         container.appendChild(alert);
         
-        // Remove the alert after a certain duration (optional)
+        // Remove the alert 
         setTimeout(() => {
           container.removeChild(alert);
-        }, 5000); // Remove after 5 seconds
+        }, 5000); 
       } else {
         console.error('Error editing post:', response.statusText);
-        // Handle other error cases
       }
     }
   } catch (error) {
@@ -163,35 +153,40 @@ const editPost = async (postId, fieldName, newValue) => {
 };
 
 
-
-// Function to toggle night mode
 const toggleNightMode = () => {
   setNightMode(!nightMode);
 };
 
 
+
 return (
   <div className={`app-container ${nightMode ? 'night-mode' : ''}`}>
-    <Navbar toggleNightMode={toggleNightMode}
-      nightMode={nightMode}
-      userProfilePicture={userData ? userData.profilePic : ''}
-      userDisplayName={userData ? userData.displayName : ''} />
+    
+  
+      <Navbar toggleNightMode={toggleNightMode}
+        nightMode={nightMode}
+        userProfilePicture={userData ? userData.profilePic : ''}
+        userDisplayName={userData ? userData.displayName : ''}
+      />
+    
+
     <div className="container-fluid">
       <div className="row">
-        <div className="col-3">
+        <div className="col-md-3 d-none d-md-block">
           <Menu
             proPic={userData ? userData.profilePic : ''}
-            username={userData ? userData.username : ''} />
+            username={userData ? userData.username : ''} 
+            />
         </div>
-        <div className="col-9">
-          <div className="row" style={{ height: '110px' }}>
+
+      <div className="col-12 col-md-9 d-flex flex-column">
             <ThinkBox
               addNewPost={addNewPost}
               proPic={userData ? userData.profilePic : ''}
-              authorName={userData ? userData.displayName : ''} />
-          </div>
-          <div className="row" style={{ height: 'calc(100% - 150px)' }}>
+              authorName={userData ? userData.displayName : ''} 
+            />
 
+        <div className="flex-grow-1 d-flex flex-column" >
             {/* Notification container */}
             <div id="notification-container"></div>
 

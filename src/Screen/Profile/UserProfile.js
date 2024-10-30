@@ -1,13 +1,12 @@
 // UserProfile.js
 import React, { useEffect, useState } from 'react';
 import './Profile.css';
-// import Feed from '../Feed/Feed';
 import UserFeed from './UserFeed';
 import EditProfilePopup from './EditProfilePopup';
 import FriendListPopup from '../FriendList'; 
 import { useNavigate } from 'react-router-dom';
 import FRequestsPopup from './FRequestsPopup';
-import '../Menu.css'; // Import the CSS file
+import '../Menu.css'; 
 
 import { fetchUserData,fetchUserPosts, fetchFriendsList, saveChanges, deleteUserProfile } from '../api';
 

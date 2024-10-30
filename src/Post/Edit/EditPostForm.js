@@ -5,7 +5,6 @@ import React, { useState, useEffect, useRef } from 'react';
 const EditPostForm = ({ initialText, onSave, onCancel, onEditPost }) => {
   const [editedText, setEditedText] = useState(initialText);
   const textAreaRef = useRef(null);
-  // const fileInputRef = useRef(null);
 
   
   useEffect(() => {
