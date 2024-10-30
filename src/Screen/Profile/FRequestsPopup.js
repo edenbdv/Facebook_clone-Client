@@ -40,7 +40,8 @@ const FRequestsPopup = ({ token, currentUser, friendreqs, handleClose, onHandleF
 
     const handleDeleteRequest = async (friendId) => {
         try {
-            await deleteFriendRequest(currentUser.id, friendId, token);
+            console.log("try to delete req")
+            await deleteFriendRequest(currentUser, friendId, token);
             onHandleFriendRequest();
 
         } catch (error) {
@@ -74,9 +75,10 @@ const FRequestsPopup = ({ token, currentUser, friendreqs, handleClose, onHandleF
                                                     className="rounded-circle profile-image"
                                                     />
                                                 <span className="display-name">{request.displayName}</span>
+                                                <button onClick={() => handleAcceptRequest(request.username)}>Accept</button>
+                                                <button onClick={() => handleDeleteRequest(request.username)}>Delete</button>
                                             </div>
-                                            <button onClick={() => handleAcceptRequest(request.username)}>Accept</button>
-                                            <button onClick={() => handleDeleteRequest(request.username)}>Delete</button>
+                                           
                                         </li>
                                      ) })}
                             </ul>

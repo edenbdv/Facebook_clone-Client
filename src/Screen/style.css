@@ -2,12 +2,14 @@
 
 body {
     background-color: rgb(235, 232, 232);
+
   }
   
 
 .box-container {
     border: 0;
     background-color: white;
+    
     padding: 20px;
     border-radius: 5px;
     margin: 20px ;
@@ -27,6 +29,7 @@ body {
 
 .app-container.night-mode {
     background-color: rgb(99, 94, 94);
+    
 }
 
 

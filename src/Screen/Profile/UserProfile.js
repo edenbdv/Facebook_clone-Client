@@ -7,6 +7,8 @@ import EditProfilePopup from './EditProfilePopup';
 import FriendListPopup from '../FriendList'; 
 import { useNavigate } from 'react-router-dom';
 import FRequestsPopup from './FRequestsPopup';
+import '../Menu.css'; // Import the CSS file
+
 import { fetchUserData,fetchUserPosts, fetchFriendsList, saveChanges, deleteUserProfile } from '../api';
 
 const UserProfile = ({ token }) => {
@@ -147,20 +149,20 @@ const UserProfile = ({ token }) => {
                     </div>
                 </div>
                 {/* Edit profile button */}
-                <div className="col-md-4">
+                <div className="col-md-4 ">
                     <div className="d-flex flex-column justify-content-end align-items-center">
-                        <button className="btn btn-outline-secondary btn-sm btn-edit" onClick={openEditContainer}>
-                            <i className="bi bi-pencil"></i>Edit Profile
+                        <button className=" btn btn-outline-secondary text-start w-100 btn-edit" onClick={openEditContainer}>
+                            <i className="bi bi-pencil "></i> Edit Profile
                         </button>
-                        <button className="btn btn-outline-secondary btn-sm btn-edit" onClick={handleOpenFriendList}>
-                            <i className="bi bi-people-fill"></i>View Friends
+                        <button className="btn btn-outline-secondary  text-start  w-100 btn-edit" onClick={handleOpenFriendList}>
+                            <i className="bi bi-people-fill"></i> View Friends
                         </button>
-                        <button className="btn btn-outline-secondary btn-sm btn-edit" onClick={deleteProfile}>
-                            <i className="bi bi-trash"></i>Delete Profile
+                        <button className="btn btn-outline-secondary   text-start w-100 btn-edit" onClick={deleteProfile}>
+                            <i className="bi bi-trash"></i> Delete Profile
                         </button>
                         {/* Button to open friend requests popup */}
-                        <button className="btn btn-outline-secondary btn-sm btn-edit" onClick={handleOpenFriendRequests}>
-                            <i className="bi bi-people-fill"></i>Friend Requests
+                        <button className="btn btn-outline-secondary  text-start w-100 btn-edit" onClick={handleOpenFriendRequests}>
+                            <i className="bi bi-people-fill"></i> Friend Requests
                         </button>
                     </div>
                 </div>
@@ -170,7 +172,6 @@ const UserProfile = ({ token }) => {
                 <EditProfilePopup
                     handleClose={closeEditContainer}
                     handleSave={handleSaveUserData}
-                    // userData={userData}
                 />
             )}
             {/* Friend list popup */}
