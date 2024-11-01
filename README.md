@@ -16,20 +16,16 @@ wiki: https://github.com/edenbdv/Facebook_clone-Server.git
 Foobar allows users to create accounts securely with a unique username and password. Key features include:
 - **Create Account:** 
   - Users can securely create an account with a unique username and password.
-
-- **Login:** 
-  - Users can log in to access their accounts and use the app's features.
-
-- **During Signup:**
-  - **Upload a Profile Picture:** Users must upload a profile picture.
-  - **Full Name:** Ensure your full name consists only of letters.
-  - **Username:** Create a unique username.
-  - **Password Requirements:**
+    - **Password Requirements:**
     - Contains at least 8 characters.
     - Includes both letters and numbers.
     - Must match the password entered again.
 
-This secure and user-friendly process ensures a smooth onboarding experience for new users.
+  This secure and user-friendly process ensures a smooth onboarding experience for new users.
+
+- **Login:** 
+  - Users can log in to access their accounts and use the app's features.
+
 
 ![login](https://github.com/user-attachments/assets/334173b9-571f-4a1e-a27c-9c672ea950aa)
   
