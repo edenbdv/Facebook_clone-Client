@@ -32,7 +32,7 @@ const EditProfilePopup = ({handleClose, handleSave }) => {
         } else {
             setEditedUserData((prevData) => ({
                 ...prevData,
-                [name]: value,  // For text inputs
+                [name]: value,  
             }));
         }
 

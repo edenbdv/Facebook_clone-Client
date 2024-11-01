@@ -4,7 +4,6 @@ import './Comment.css'
 
 const Comment = ({ comments, deleteComment, editComment }) => {
 
-    // Function to handle deleting a comment
     const handleDeleteComment = (commentId) => {
         deleteComment(commentId);
     };
@@ -12,10 +11,7 @@ const Comment = ({ comments, deleteComment, editComment }) => {
     const [editedCommentId, setEditedCommentId] = useState(null);
     const [editedComment, setEditedComment] = useState('');
 
-    // Function to handle editing a comment
     const handleEditComment = (commentId, text) => {
-        // Set the edited comment content
-        //editComment(commentId, text);
         setEditedCommentId(commentId);
         setEditedComment(text);
     };
@@ -25,7 +21,6 @@ const Comment = ({ comments, deleteComment, editComment }) => {
         setEditedComment('');
     };
 
-    // Function to handle saving the edited comment
     const handleSaveEdit = (commentId) => {
         editComment(commentId, editedComment);
         setEditedCommentId(null);

@@ -41,6 +41,8 @@ const NonFriendProfile = ({ visitedUser, token }) => {
     return (
         <div className="container mt-4">
             {/* Profile header */}
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
+
             <div className="row justify-content-center">
                 <div className="col-md-8">
                     <div className="profile-container p-4 shadow rounded">
@@ -48,7 +50,7 @@ const NonFriendProfile = ({ visitedUser, token }) => {
                             <div className="col-md-4 text-center">
                                 <img src={imageUrl} alt="Profile" className="rounded-circle profile-picture" />
                             </div>
-                            <div className="col-md-8">
+                            <div className="col-md-8 ">
                                 <h1>{displayName}</h1>
                                 {/* Button to send friend request */}
                                 <button className="btn btn-primary" onClick={handleSendFriendRequest}>Add Friend</button>
@@ -61,10 +63,19 @@ const NonFriendProfile = ({ visitedUser, token }) => {
                                 {/* Error alert */}
                                 {errorAlertVisible && (
                                     <div className="alert alert-danger mt-3" role="alert">
-                                        Error sending friend request
+                                        Already has a pending friend request
                                     </div>
                                 )}
                             </div>
+                        </div>
+                        </div>
+                       {/* Message to indicate that only friends can see posts */}
+                    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '500px' }}>
+                        <div className="text-center">
+                            <p className="text-muted">
+                                Only friends can see this user's posts.
+                            </p>
+                            <i className="bi bi-people-fill fs-1"></i>
                         </div>
                     </div>
                 </div>

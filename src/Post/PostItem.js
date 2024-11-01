@@ -1,13 +1,12 @@
-import './PostItem.css'; // Import the CSS file
+import './PostItem.css'; 
 import LikeButton from '../PostButtons/LikeButton';
 import ShareButton from '../PostButtons/ShareButton';
 import CommentButton from '../PostButtons/Comment/CommentButton';
-// import Comment from '../PostButtons/Comment/Comment';
 import CommentPopUp from '../PostButtons/Comment/CommentPopUp';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom'; 
 import EditPost from './Edit/EditPost';
-import EditPostForm from './Edit/EditPostForm'; // Import the EditPostForm component
+import EditPostForm from './Edit/EditPostForm'; 
 import DeletePost from './Delete/DeletePost';
 
 function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onDelete, onEditPost }) {
@@ -24,7 +23,6 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
         day: '2-digit',
         hour: '2-digit',
         minute: '2-digit',
-        second: '2-digit',
         hour12: false, 
       });
 
@@ -43,7 +41,6 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
     };
 
     const onSaveText = (editedText) => {
-        // Implement logic to save edited text
         onEditPost('text', editedText);
     };
 
@@ -53,18 +50,15 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
     };
 
     const addComment = (newComment) => {
-        // Add new comment to the comments state
         const newCommentObject = { id: comments.length + 1, text: newComment };
         setComments([...comments, newCommentObject]);
     };
 
     const deleteComment = (commentId) => {
-        // Remove comment with specified ID from the comments state
         setComments(comments.filter(comment => comment.id !== commentId));
     };
 
     const editComment = (commentId, editedContent) => {
-        // Edit comment with specified ID
         setComments(comments.map(comment => {
             if (comment.id === commentId) {
                 return { ...comment, text: editedContent };
@@ -79,12 +73,12 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
     };
 
     const handleDeleteClick = () => {
-        onDelete(_id); // Call the onDeletePost function with the id of the post to delete
+        onDelete(_id); 
     };
 
     return (
-        <div className="card-container">
-            <div className="card mb-3" style={{ width: '50rem' }}>
+<div className=" card-container">
+        <div className="card mb-3" >
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
                 <div className="card-header d-flex justify-content-between align-items-center">
                     <div className="d-flex align-items-center justify-content-center">
@@ -118,7 +112,9 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
                                 <DeletePost onDeletePost={DeletePost} onClick={handleDeleteClick} />
                             </div>
                         )}
-                        <div className="text-muted ml-2">{formattedDate}</div>
+                        <div className="card-date  mt-2 ml-2" >
+                                {formattedDate}
+                        </div>
                     </div>
                 </div>
 
@@ -131,9 +127,15 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
                     </div>
                 )}
                 <div className="card-footer d-flex justify-content-between align-items-center">
+                <div className="col-4 d-flex justify-content-center">
                     <LikeButton liked={liked} handleLikeClick={handleLikeClick} />
+                </div>
+                <div className="col-4 d-flex justify-content-center">
                     <CommentButton onClick={toggleComments} />
+                </div>
+                <div className="col-4 d-flex justify-content-center">
                     <ShareButton />
+                </div>
                 </div>
             </div>
             {showComments && <CommentPopUp

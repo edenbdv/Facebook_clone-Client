@@ -1,5 +1,5 @@
 import React from 'react';
-import './ButtonStyle.css'; // Import the CSS file
+import './ButtonStyle.css'; 
 
 function LikeButton({ liked, handleLikeClick }) {
     return (

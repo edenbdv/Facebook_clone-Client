@@ -1,14 +1,13 @@
-import Compressor from 'compressorjs'; 
 import React, { useState, useEffect, useRef } from 'react';
 import './AddPost.css';
 
-const AddPost = ({ handleClosePopup, addNewPost, authorName, proPic }) => {
+const AddPost = ({ handleClosePopup, addNewPost }) => {
     const [inputValue, setInputValue] = useState('');
     const [image, setImage] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
     const [isInputEmpty, setIsInputEmpty] = useState(true);
     const inputRef = useRef(null);
-    //const [postIdCounter, setPostIdCounter] = useState(11); // Initialize the counter with 1
+
 
     useEffect(() => {
         // Focus on the textarea when the component mounts
@@ -26,8 +25,8 @@ const AddPost = ({ handleClosePopup, addNewPost, authorName, proPic }) => {
     
             img.onload = () => {
                 const canvas = document.createElement('canvas');
-                const MAX_WIDTH = 300; // Adjust as needed
-                const MAX_HEIGHT = 300; // Adjust as needed
+                const MAX_WIDTH = 300; 
+                const MAX_HEIGHT = 300; 
                 let width = img.width;
                 let height = img.height;
     
@@ -57,29 +56,6 @@ const AddPost = ({ handleClosePopup, addNewPost, authorName, proPic }) => {
 
         reader.readAsDataURL(file);
         
-        // new Compressor(file, {
-        //     quality: 0.6, 
-        //     success(result) {
-        //         const reader = new FileReader();
-        //         reader.onloadend = () => {
-        //             const imageData = reader.result.toString(); // Convert image data to string
-        //             setImage(imageData); // Set the compressed image
-        //             setImagePreview(reader.result);
-        //         };
-        //         reader.readAsDataURL(result);
-        //     },
-        //     error(err) {
-        //         console.error('Image compression failed:', err);
-        //     },
-        // });
-
-        // // Display a preview of the selected image
-        // const reader = new FileReader();
-        // reader.onloadend = () => {
-        //     setImage(reader.result);
-        //     setImagePreview(reader.result);
-        // };
-        // reader.readAsDataURL(file);
     };
 
     const handleInputChange = (event) => {
@@ -90,22 +66,12 @@ const AddPost = ({ handleClosePopup, addNewPost, authorName, proPic }) => {
 
     const handlePost = () => {
         if (!isInputEmpty|| image) {   
-        // const newPost = {
-            // text: inputValue || '',
-            // picture: image ||'', 
-            // authorP: proPic, 
-            // authorN: authorName,
-            // date: new Date().toLocaleString() // Current date and time
-        // };
-        // addNewPost(newPost); // Call the addPost function to add the new post
-
-
-        addNewPost(inputValue || '', image || ''); // Pass text and picture separately
-        handleClosePopup(); // Close the popup after posting
-        setInputValue(''); // Clear input after posting
-        setIsInputEmpty(true); // Reset input validation
-        setImage(null); // Reset attached image
-        setImagePreview(null); // Reset image preview
+        addNewPost(inputValue || '', image || ''); 
+        handleClosePopup(); 
+        setInputValue(''); 
+        setIsInputEmpty(true); 
+        setImage(null); 
+        setImagePreview(null); 
         }
     };
 

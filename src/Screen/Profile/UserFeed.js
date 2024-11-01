@@ -69,9 +69,6 @@ const UserFeed = ({ posts, token }) => {
         }
       });
       if (response.ok) {
-        // If the request was successful, update the state by filtering out the deleted post
-        // setPostsWithUserData(posts.filter(post => post.id !== postId));
-        // fetchUserPosts(userData.username, token);
         const userPostsData = await fetchUserPosts(userData.username, token);
        setPostsWithUserData(userPostsData);
        
@@ -99,23 +96,22 @@ const UserFeed = ({ posts, token }) => {
        setPostsWithUserData(userPostsData);
       } else {
         if (response.status === 403) {
-          // Post editing not allowed, raise a Bootstrap notification
+          // Post editing not allowed
           const alert = document.createElement('div');
           alert.className = 'alert alert-danger';
           alert.setAttribute('role', 'alert');
           alert.innerText = 'Sorry, you are not allowed to edit this post.';
           
-          // Append the alert to a suitable location in your DOM
+          // Append the alert 
           const container = document.getElementById('notification-container');
           container.appendChild(alert);
           
-          // Remove the alert after a certain duration (optional)
+          // Remove the alert 
           setTimeout(() => {
             container.removeChild(alert);
-          }, 5000); // Remove after 5 seconds
+          }, 5000); 
         } else {
           console.error('Error editing post:', response.statusText);
-          // Handle other error cases
         }
       }
     } catch (error) {
@@ -125,14 +121,15 @@ const UserFeed = ({ posts, token }) => {
   
   
 
+  
   return (
-    <div>
+    <div className='col-12 col-md-9 d-flex flex-column'>
       {postsWithUserData.map((post) => (
         <PostItem
           _id={post._id}
           text={post.text} 
           picture={addPrefixIfNeeded(post.picture)} 
-          authorP={addPrefixIfNeeded(userData.profilePic)} // Corrected prop name
+          authorP={addPrefixIfNeeded(userData.profilePic)} 
           authorN={post.authorData ? post.authorData.displayName : ''} 
           isoDate={post.createdAt} 
           username={post.createdBy}
