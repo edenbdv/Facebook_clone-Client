@@ -4,13 +4,32 @@
 
 
 
+
+
 "Foobar" is a social networking application similar to Facebook, designed to connect people and support sharing of updates and photos.
 
 wiki: https://github.com/edenbdv/Facebook_clone-Server.git
 
 ## Features
 
-### **Login and Signup** Foobar allows users to create accounts securely with a unique username and password. Users can then log in to access their accounts and use the app's features. Note that during signup, you must upload a profile picture, and your full name should only consist of letters. Your username must be unique, and your password must contain at least 8 characters, including letters and numbers, and it must match the password you entered again.
+### **Login and Signup** 
+Foobar allows users to create accounts securely with a unique username and password. Key features include:
+- **Create Account:** 
+  - Users can securely create an account with a unique username and password.
+
+- **Login:** 
+  - Users can log in to access their accounts and use the app's features.
+
+- **During Signup:**
+  - **Upload a Profile Picture:** Users must upload a profile picture.
+  - **Full Name:** Ensure your full name consists only of letters.
+  - **Username:** Create a unique username.
+  - **Password Requirements:**
+    - Contains at least 8 characters.
+    - Includes both letters and numbers.
+    - Must match the password entered again.
+
+This secure and user-friendly process ensures a smooth onboarding experience for new users.
 
 ![login](https://github.com/user-attachments/assets/334173b9-571f-4a1e-a27c-9c672ea950aa)
   
