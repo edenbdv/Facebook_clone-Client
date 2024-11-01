@@ -61,16 +61,26 @@ This user-friendly interface ensures that managing personal profiles and social 
   <img width="1131" alt="‏‏לכידה" src="https://github.com/user-attachments/assets/41f0069f-64d6-462e-a972-b2b7ff773ad1">
 
 
-## Technologies Used
+## Technologies Used (whole project)
 
 - **Frontend:** The frontend of Foobar is built with **HTML, CSS, and JavaScript, utilizing React.js** for dynamic user interfaces. It features reusable components for improved maintainability and scalability. React Hooks manage state and side effects efficiently, while the Fetch API allows asynchronous data retrieval, keeping the UI responsive. This integration of form handling, data fetching, and conditional rendering ensures a smooth user experience, complemented by React's ecosystem of routing and state management libraries.
+
+- - **Backend:** The backend of Foobar is designed to handle server-side logic and routing efficiently. Key features include:
+  - **Node.js:** Utilizes a non-blocking, event-driven architecture for efficient handling of multiple connections.
+  - **Express.js:** Simplifies server creation and routing, providing a robust set of features for web applications.
+  - **MongoDB:** A NoSQL database used for storing user data and posts, offering flexibility and scalability.
+  - **jsonwebtoken:** Implements JSON Web Tokens for secure user authentication and authorization, ensuring safe access to protected resources.
+  - **WebSockets:** Enables real-time communication between clients and the server, facilitating instant updates.
+  - **Multithreading:** Supports concurrent processing, allowing the server to handle multiple requests simultaneously for improved performance.
+
 
 ## Dependencies
 
 - **Frontend:**
   - React.js
   - React Router
-  - Bootstrap 
+  - Bootstrap
+ 
 
 ## Running the code
 
