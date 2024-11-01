@@ -15,7 +15,7 @@
   - **React:** Utilizes for building reusable components and managing state efficiently.
   - **HTML & CSS:** Structures and styles the user interface, ensuring a responsive design.
   
-- **Backend:** The backend of Foobar is designed to handle server-side logic and routing efficiently. Key features include:
+**Backend:** The backend of Foobar is designed to handle server-side logic and routing efficiently. Key features include:
   - **Node.js:** Utilizes a non-blocking, event-driven architecture for efficient handling of multiple connections.
   - **Express.js:** Simplifies server creation and routing, providing a robust set of features for web applications.
   - **MongoDB:** A NoSQL database used for storing user data and posts, offering flexibility and scalability.
@@ -35,10 +35,7 @@ wiki: https://github.com/edenbdv/Facebook_clone-Server.git
 Foobar allows users to create accounts securely with a unique username and password. Key features include:
 - **Create Account:** 
   - Users can securely create an account with a unique username and password.
-    - **Password Requirements:**
-    - Contains at least 8 characters.
-    - Includes both letters and numbers.
-    - Must match the password entered again.
+    - **Password Requirements:** Contains at least 8 characters,Includes both letters and number.
 
   This secure and user-friendly process ensures a smooth onboarding experience for new users.
 
