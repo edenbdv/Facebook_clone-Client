@@ -10,22 +10,22 @@
 
 ## Technologies Used (whole project)
 
--**Frontend:** The frontend of Foobar is built with **JavaScript, React, HTML, and CSS**. Key features include:
--- **JavaScript:** Provides dynamic functionality and interactivity.
--- **React:** Used for building reusable components and managing state efficiently.
--- **HTML & CSS:** Structures and styles the user interface, ensuring a responsive design.
+**Frontend:** The frontend of Foobar is built with **JavaScript, React, HTML, and CSS**. Key features include:
+- **JavaScript:** Provides dynamic functionality and interactivity.
+- **React:** Used for building reusable components and managing state efficiently.
+- **HTML & CSS:** Structures and styles the user interface, ensuring a responsive design.
 
-  
--**Backend:** The backend of Foobar is designed to handle server-side logic and routing efficiently. Key features include:
--- **Node.js:** Utilizes a non-blocking, event-driven architecture for efficient handling of multiple connections.
--- **Express.js:** Simplifies server creation and routing, providing a robust set of features for web applications.
--- **MongoDB:** A NoSQL database used for storing user data and posts, offering flexibility and scalability.
--- **jsonwebtoken:** Implements JSON Web Tokens for secure user authentication and authorization, ensuring safe access to protected resources.
--- **WebSockets:** Enables real-time communication between clients (the web server) and the server (the bloom-filter/TCP server), facilitating instant updates.
--- **Multithreading:** Supports concurrent processing, allowing the server (the bloom-filter/TCP server) to handle multiple requests simultaneously for improved performance.
--- **TCP:** Utilizes Transmission Control Protocol for reliable and ordered data transmission.
 
-  
+**Backend:** The backend of Foobar is designed to handle server-side logic and routing efficiently. Key features include:
+- **Node.js:** Utilizes a non-blocking, event-driven architecture for efficient handling of multiple connections.
+- **Express.js:** Simplifies server creation and routing, providing a robust set of features for web applications.
+- **MongoDB:** A NoSQL database used for storing user data and posts, offering flexibility and scalability.
+- **jsonwebtoken:** Implements JSON Web Tokens for secure user authentication and authorization, ensuring safe access to protected resources.
+- **WebSockets:** Enables real-time communication between clients (the web server) and the server (the bloom-filter/TCP server), facilitating instant updates.
+- **Multithreading:** Supports concurrent processing, allowing the server (the bloom-filter/TCP server) to handle multiple requests simultaneously for improved performance.
+- **TCP:** Utilizes Transmission Control Protocol for reliable and ordered data transmission.
+
+
 - **RESTful API:** Implements REST principles for structured and efficient communication between the frontend and backend.
 
 
