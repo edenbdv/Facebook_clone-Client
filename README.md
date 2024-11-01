@@ -92,6 +92,10 @@ This user-friendly interface ensures that managing personal profiles and social 
 
 ## Running the client-side:
 
+-**important note**: you will need also the clone and run the bloom-filter server (the web server comminucates with it) 
+you can see the instructuins for it right here:
+Bloom-Filter server: https://github.com/edenbdv/BloomFilter.git
+
 1. Clone the repository:
 
    ```bash
