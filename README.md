@@ -8,6 +8,9 @@
 
 "Foobar" is a social networking application similar to Facebook, designed to connect people and support sharing of updates and photos.
 
+wiki: https://github.com/edenbdv/Facebook_clone-Server.git
+
+
 ## Technologies Used (whole project)
 
 **Frontend:** The frontend of Foobar is built with **JavaScript, React, HTML, and CSS**. Key features include:
@@ -29,8 +32,6 @@
 - **RESTful API:** Implements REST principles for structured and efficient communication between the frontend and backend.
 
 
-
-wiki: https://github.com/edenbdv/Facebook_clone-Server.git
 
 ## Features
 
