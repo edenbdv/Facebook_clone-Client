@@ -1,14 +1,7 @@
 # Facebook_clone-client
 
-**Login Page:**
-![login](https://github.com/user-attachments/assets/334173b9-571f-4a1e-a27c-9c672ea950aa)
+<img width="922" alt="‏‏Feed" src="https://github.com/user-attachments/assets/a122e367-369f-44a8-b253-3128fd96639d">
 
-**Sign Up Page:**
-![image](https://github.com/user-attachments/assets/60b2b411-2f21-4230-a27b-9eb5f9b74171)
-
-**Feed Page:**
-
-![image](https://github.com/user-attachments/assets/6adb27e0-9298-47ae-bc19-b2e0b283d808)
 
 
 "Foobar" is a social networking application similar to Facebook, designed to connect people and support sharing of updates and photos.
@@ -19,7 +12,31 @@ wiki: https://github.com/edenbdv/Facebook_clone-Server.git
 
 - **Sign Up and Login:** Foobar allows users to create accounts securely with a unique username and password. Users can then log in to access their accounts and use the app's features. Note that during signup, you must upload a profile picture, and your full name should only consist of letters. Your username must be unique, and your password must contain at least 8 characters, including letters and numbers, and it must match the password you entered again.
 
+![login](https://github.com/user-attachments/assets/334173b9-571f-4a1e-a27c-9c672ea950aa)
+  
+![image](https://github.com/user-attachments/assets/60b2b411-2f21-4230-a27b-9eb5f9b74171)
+
+
 - **Feed:** The core feature of Foobar is its feed, where users can view updates, posts, and media. On the feed page, you'll find all the posts on Foobar. You have the ability to create new posts, edit existing ones, and delete them as needed. Additionally, you can comment on posts and like them. At the top menu, you'll find a search box along with two buttons: the Log Out button, which redirects you to the login page and logs out the current user, and the Night Mode button, which switches the site's theme.
+
+ <img width="922" alt="‏‏Feed" src="https://github.com/user-attachments/assets/a122e367-369f-44a8-b253-3128fd96639d">
+
+<img width="305" alt="‏‏responsive_feed" src="https://github.com/user-attachments/assets/2a070ac1-4353-48be-bebf-7785864c8d7a">
+
+
+- **Profile:** The Profile page in Foobar provides users with an overview of their personal information and social connections. Key features include:
+
+- **Edit Personal Details:** Users can easily update their display name, profile picture, and other personal information to keep their profile current and engaging.
+
+- **View Friends:** Users can view a list of their friends, allowing them to keep track of their connections on the platform.
+
+- **Friend Requests Management:** The Profile page allows users to accept or decline incoming friend requests, facilitating seamless social interactions.
+
+- **User Interaction:** Users can explore additional options related to their friends and friend requests, enhancing their networking experience on Foobar.
+
+This user-friendly interface ensures that managing personal profiles and social connections is efficient and intuitive.
+  <img width="1131" alt="‏‏לכידה" src="https://github.com/user-attachments/assets/41f0069f-64d6-462e-a972-b2b7ff773ad1">
+
 
 ## Technologies Used
 
