@@ -15,6 +15,7 @@
   - **React:** Utilizes for building reusable components and managing state efficiently.
   - **HTML & CSS:** Structures and styles the user interface, ensuring a responsive design.
     
+
   
 **Backend:** The backend of Foobar is designed to handle server-side logic and routing efficiently. Key features include:
   - **Node.js:** Utilizes a non-blocking, event-driven architecture for efficient handling of multiple connections.
