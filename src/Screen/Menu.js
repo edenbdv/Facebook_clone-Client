@@ -1,14 +1,13 @@
 // Menu.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Menu.css'; // Import the CSS file
+import './Menu.css'; 
 
 const Menu = ({ proPic, username }) => {
 
-    const navigate = useNavigate(); // Initialize navigate
+    const navigate = useNavigate(); 
 
     const navigateToProfile = () => {
-        //console.log("Before navigation - proPic:", proPic, "displayName:", displayName);
         navigate(`/profile/${username}`)
     };
 

@@ -129,7 +129,7 @@ const UserFeed = ({ posts, token }) => {
           _id={post._id}
           text={post.text} 
           picture={addPrefixIfNeeded(post.picture)} 
-          authorP={addPrefixIfNeeded(userData.profilePic)} // Corrected prop name
+          authorP={addPrefixIfNeeded(userData.profilePic)} 
           authorN={post.authorData ? post.authorData.displayName : ''} 
           isoDate={post.createdAt} 
           username={post.createdBy}

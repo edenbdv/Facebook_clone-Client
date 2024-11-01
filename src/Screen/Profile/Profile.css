@@ -1,9 +1,10 @@
 /* style.css */
 .profile-container {
-    background-color: #ffffff; 
+    background: linear-gradient(135deg, #0c2d48, #145da0, #2e8bc0, #b1d4e0);    
     width: 100% !important; 
     height: 200px; 
     max-width: none;
+    color: #fff; 
     
 }
 
@@ -19,3 +20,11 @@ body {
     height: 150px; 
 }
 
+
+
+@media (max-width: 768px) {
+    .profile-picture {
+        width: 100px; 
+        height: 100px; 
+    }
+  }

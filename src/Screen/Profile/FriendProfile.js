@@ -28,11 +28,8 @@ const FriendProfile = ({ visitedUser, token }) => {
     const fetchUserDetails = async () => {
         if (visitedUser && token) {
             try {
-                // console.log("visitedUser",visitedUser)
                 const userInfo = await fetchUserData(visitedUser, token);
-                // console.log("userInfo", userInfo);
                 const friends = await fetchFriendsList(visitedUser, token);
-                // console.log("friends: ",friends)
                 setFriendsList(friends);
                 setUserDetails(userInfo);
                 setLoading(false);
@@ -77,7 +74,7 @@ const FriendProfile = ({ visitedUser, token }) => {
         <div className="container mt-4">
             {/* Friend profile header */}
             <div className="row justify-content-center">
-                <div className="col-md-8">
+                <div className="col-md-9">
                     <div className="profile-container p-4 shadow rounded">
                         <div className="row align-items-center">
                             <div className="col-md-4 text-center">
@@ -89,12 +86,15 @@ const FriendProfile = ({ visitedUser, token }) => {
                         </div>
                     </div>
                 </div>
-                <div className="col-md-4">
-                    <div className="d-flex flex-column justify-content-end align-items-center">
-                        {/* View friends button */}
-                        <button className="btn btn-outline-secondary btn-sm btn-edit" onClick={handleOpenFriendList}>
-                            <i className="bi bi-people-fill"></i>View Friends
-                        </button>
+                <div className="col-md-3">
+                    <div className=" list-group ">
+                        <li className="list-group-item">
+                                <button className=" btn  text-start w-100 btn-edit" onClick={handleOpenFriendList}>
+                                    <i className="bi bi-people-fill"></i> 
+                                    <span className="menu-text">View Friends</span>
+                                </button>
+                        </li>
+
                     </div>
                 </div>
             </div>
@@ -107,7 +107,7 @@ const FriendProfile = ({ visitedUser, token }) => {
                 />
             )}
             {/* Friend posts */}
-            <div className="mt-4">
+            <div className="mt-4 col-12 col-md-9 d-flex flex-column">
                 <h2>Friend Posts</h2>
                 {/* Check if userPosts is not null before passing it to Feed */}
                 <Feed posts={friendPosts || []} onDeletePost={null} onEditPost={null} token={token}/>

@@ -125,7 +125,6 @@ const UserProfile = ({ token }) => {
         return <div>Loading...</div>;
     }
 
-    // const storedUserData = JSON.parse(localStorage.getItem('userData'));
     const { displayName, profilePic } = storedUserData;
     const imageUrl = `data:image/jpeg;base64,${profilePic}`;
 
@@ -134,32 +133,58 @@ const UserProfile = ({ token }) => {
         <div className="container mt-4">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"></link>
             {/* Profile header */}
-            <div className="row justify-content-center">
+                <div className="row justify-content-center">
                 <div className="col-md-9">
-                    <div className="profile-container d-flex align-items-center justify-content-between p-4 shadow rounded">
-                         <div className="d-flex align-items-center">
+                    <div className="profile-container p-4 shadow rounded">
+                        <div className="row align-items-center">
+                            <div className="col-md-4 text-center">
                                 <img src={imageUrl} alt="Profile" className="rounded-circle profile-picture" />
+                            </div>
+                            <div className="col-md-8">
                                 <h1>{displayName}</h1>
+                            </div>
                         </div>
                     </div>
                 </div>
                 {/* Edit profile button */}
                 <div className="col-md-3 ">
-                    <div className="d-flex flex-column justify-content-end align-items-center">
-                        <button className=" btn btn-outline-secondary text-start w-100 btn-edit" onClick={openEditContainer}>
-                            <i className="bi bi-pencil "></i> Edit Profile
-                        </button>
-                        <button className="btn btn-outline-secondary  text-start  w-100 btn-edit" onClick={handleOpenFriendList}>
-                            <i className="bi bi-people-fill"></i> View Friends
-                        </button>
-                        <button className="btn btn-outline-secondary   text-start w-100 btn-edit" onClick={deleteProfile}>
-                            <i className="bi bi-trash"></i> Delete Profile
-                        </button>
-                        {/* Button to open friend requests popup */}
-                        <button className="btn btn-outline-secondary  text-start w-100 btn-edit" onClick={handleOpenFriendRequests}>
-                            <i className="bi bi-people-fill"></i> Friend Requests
-                        </button>
-                    </div>
+                    <ul class="list-group  flex-buttons">
+                            <li className="list-group-item">
+                                <button className=" btn  text-start w-100 btn-edit" onClick={openEditContainer}>
+                                <span className="icon-text">
+                                    <i className="bi bi-pencil icon-above"></i>
+                                    <span className="menu-text">Edit Profile</span>
+                                </span>
+                                </button>
+                            </li>
+
+                            <li className="list-group-item">
+                                <button className=" btn  text-start w-100 btn-edit" onClick={handleOpenFriendList}>
+                                <span className="icon-text">
+                                    <i className="bi bi-people-fill icon-above"></i>
+                                    <span className="menu-text">View Friends</span>
+                                </span>
+                                </button>
+                            </li>
+
+                            <li className="list-group-item">
+                                <button className=" btn  text-start w-100 btn-edit" onClick={deleteProfile}>
+                                <span className="icon-text">
+                                    <i className="bi bi-trash icon-above"></i>
+                                    <span className="menu-text">Delete Profile</span>
+                                </span>
+                                </button>
+                            </li>
+
+                            <li className="list-group-item">
+                                <button className=" btn  text-start w-100 btn-edit" onClick={handleOpenFriendRequests}>
+                                <span className="icon-text">
+                                    <i className="bi bi-person-lines-fill icon-above"></i>
+                                    <span className="menu-text">Friend Requests</span>
+                                </span>
+                                </button>
+                            </li>
+                    </ul>
                 </div>
             </div>
             {/* Edit profile popup */}
