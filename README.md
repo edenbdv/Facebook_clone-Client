@@ -35,9 +35,9 @@ Foobar allows users to create accounts securely with a unique username and passw
 ### **Feed**
 The core feature of Foobar is its feed, where users can view updates, posts, and media. On the feed page, you'll find all the posts on Foobar. You have the ability to create new posts, edit existing ones, and delete them as needed. Additionally, you can comment on posts and like them. At the top menu, you'll find a search box along with two buttons: the Log Out button, which redirects you to the login page and logs out the current user, and the Night Mode button, which switches the site's theme.
 
- <img width="922" alt="‏‏Feed" src="https://github.com/user-attachments/assets/a122e367-369f-44a8-b253-3128fd96639d">
+ <img width="922" alt="‏‏Feed" src="https://github.com/user-attachments/assets/a122e367-369f-44a8-b253-3128fd96639d"> <img width="305" alt="‏‏responsive_feed" src="https://github.com/user-attachments/assets/2a070ac1-4353-48be-bebf-7785864c8d7a">
 
-<img width="305" alt="‏‏responsive_feed" src="https://github.com/user-attachments/assets/2a070ac1-4353-48be-bebf-7785864c8d7a">
+
 
 
 ### **Profile Page**
