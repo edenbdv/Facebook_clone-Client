@@ -16,27 +16,29 @@ wiki: https://github.com/edenbdv/Facebook_clone-Server.git
 Foobar allows users to create accounts securely with a unique username and password. Key features include:
 - **Create Account:** 
   - Users can securely create an account with a unique username and password.
-    - **Password Requirements:**
-    - Contains at least 8 characters.
-    - Includes both letters and numbers.
-    - Must match the password entered again.
-
+  - **Password Requirements:** Must be at least 8 characters, including letters and numbers, and must match the confirmation.
+  - 
   This secure and user-friendly process ensures a smooth onboarding experience for new users.
 
 - **Login:** 
   - Users can log in to access their accounts and use the app's features.
 
-
 ![login](https://github.com/user-attachments/assets/334173b9-571f-4a1e-a27c-9c672ea950aa)
   
-![image](https://github.com/user-attachments/assets/60b2b411-2f21-4230-a27b-9eb5f9b74171)
+![signup](https://github.com/user-attachments/assets/124a5aee-3bb2-4cf7-9fc1-772c65ae40ea)
 
 
 ### **Feed**
-The core feature of Foobar is its feed, where users can view updates, posts, and media. On the feed page, you'll find all the posts on Foobar. You have the ability to create new posts, edit existing ones, and delete them as needed. Additionally, you can comment on posts and like them. At the top menu, you'll find a search box along with two buttons: the Log Out button, which redirects you to the login page and logs out the current user, and the Night Mode button, which switches the site's theme.
+The core feature of Foobar is its feed, where users can view updates, posts, and media. Key features include:
 
- <img width="922" alt="‏‏Feed" src="https://github.com/user-attachments/assets/a122e367-369f-44a8-b253-3128fd96639d"> <img width="305" alt="‏‏responsive_feed" src="https://github.com/user-attachments/assets/2a070ac1-4353-48be-bebf-7785864c8d7a">
+- **Posts:** Users can see, create, and edit posts.
+- **Comments and Likes:** Users can comment on and like posts.
+- **Search Functionality:** A search box is available at the top menu.
+- **Navigation Buttons:**
+  - **Log Out:** Redirects to the login page and logs out the current user.
+  - **Night Mode:** Switches the site's theme.
 
+<img width="551" alt="Feed2" src="https://github.com/user-attachments/assets/b2acab04-aaca-4248-9ccd-91c0a3ed0cd3">
 
 
 
