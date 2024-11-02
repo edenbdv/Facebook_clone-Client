@@ -1,41 +1,54 @@
 // Comment.js
 import React, { useState, useEffect} from 'react';
 import './Comment.css'
-import { fetchUserData } from '../../Screen/api';
+import { fetchUserData, deleteComment, updateComment} from '../../Screen/api';
 import { addPrefixIfNeeded, formatDate } from '../../utils';
 
 
-// { comments, deleteComment, editComment }
-const Comment = ({ comment, token }) => {
-    const [userData, setUserData] = useState(null);
+const Comment = ({ postId, comment, token, updateComments }) => {
+    const [userData, setUserData] = useState(null);    
+    const [editedCommentId, setEditedCommentId] = useState(null);
+    const [editedText, setEditedText] = useState('');
 
-    // const handleDeleteComment = (commentId) => {
-    //     deleteComment(commentId);
-    // };
 
-    // const [editedCommentId, setEditedCommentId] = useState(null);
-    // const [editedComment, setEditedComment] = useState('');
+    // Function to delete comment
+    const handleDeleteComment = async (commentId) => {
+        const response = await deleteComment(postId, commentId, token);
+        if (response.status === 200) { 
+            await updateComments(); 
+        } else {
+            console.error("Error deleting comment");
+        }   
+    };
 
-    // const handleEditComment = (commentId, text) => {
-    //     setEditedCommentId(commentId);
-    //     setEditedComment(text);
-    // };
+    // Function to initiate editing
+    const handleEditComment = (commentId, text) => {
+        console.log("need to edit")
+        setEditedCommentId(commentId);
+        setEditedText(text);
+    };
+  
+    // Function to cancel editing
+    const handleCancelEdit = () => {
+        setEditedCommentId(null);
+        setEditedText('');
+    };
 
-    // const handleCancelEdit = () => {
-    //     setEditedCommentId(null);
-    //     setEditedComment('');
-    // };
-
-    // const handleSaveEdit = (commentId) => {
-    //     editComment(commentId, editedComment);
-    //     setEditedCommentId(null);
-    //     setEditedComment(''); // Clear the edited comment state after saving
-    // };
+    // Function to save edited comment
+    const handleSaveEdit = async (commentId) => {
+        const response = await updateComment(postId, commentId, editedText, token);
+        if (response.status === 200) {
+            await updateComments();
+            handleCancelEdit();
+            console.log("editedCommentId after reset:",editedCommentId)
+        } else {
+            console.error("Error saving comment");
+        }
+    };
 
 
     useEffect(() => {
         const fetchCommentUserData  = async () => {
-
             try {
                 const data = await fetchUserData(comment.createdBy, token);
                
@@ -50,7 +63,6 @@ const Comment = ({ comment, token }) => {
                 console.error('Error fetching user details:', error.message);
                 return comment;
               }
-            
         };
       
         fetchCommentUserData();
@@ -71,10 +83,36 @@ const Comment = ({ comment, token }) => {
                         </div>
                         
                         <div className='comment-content'>
-                            {userData && userData.displayName && (
+                            {/*dispaly name*/}
+                            {userData && userData.displayName && ( 
                             <span className="display-name" style={{ marginRight: '10px' }}>{userData.displayName}</span>
-                                )}        
-                              <p style={{ margin: '0', marginRight: '10px' }}>{comment.text}</p>
+                                )}  
+
+                                   {/*edit and delete buttons - only for comment owner !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/}
+                            <button type="button" className="btn btn-outline-secondary btn-sm btn-edit" onClick={() => handleEditComment(comment.commentId, comment.text)}>
+                                <i className="bi bi-pencil"></i>
+                            </button>
+
+                            <button type="button" className="btn btn-outline-secondary btn-sm btn-edit" onClick={() => handleDeleteComment(comment.commentId)}>
+                               <i className="bi bi-trash"></i>   
+                            </button>
+
+                              {/* Conditionally render input field only if editing */}
+                              {editedCommentId === comment.commentId ? (
+                                 <div>
+                                    <textarea
+                                        className="form-control"
+                                        value={editedText}
+                                        onChange={(e) => setEditedText(e.target.value)}
+                                    ></textarea>
+                                    <button type="button" className="btn btn-secondary btn-sm mt-2" onClick={() => handleSaveEdit(comment.commentId)}>Save</button>
+                                    <button type="button" className="btn btn-secondary btn-sm mt-2 ml-2" onClick={handleCancelEdit}>Cancel</button>
+                                </div>
+                            ) : (
+                                <p style={{ margin: '0', marginRight: '10px' }}>{comment.text}</p>
+                            )}
+
+
                        </div> 
                         
                     </div>

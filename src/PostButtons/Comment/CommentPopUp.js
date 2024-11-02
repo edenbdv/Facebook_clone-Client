@@ -10,29 +10,22 @@ const CommentPopup = ({ postId, token, onClose }) => {
 
     const handleAddComment = async () => {
         if (newComment.trim() !== '') {
-            console.log("going to create the comment:",newComment)
             await createComment(postId, newComment, token);
             setNewComment('');
-            // Optionally, refetch comments after adding a new one  ?????!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            const updatedComments = await fetchCommentsList(postId, token); 
-            setComments(updatedComments);
+            updateComments(); // Refresh comments list after adding a new one
         }
     };
 
+    const updateComments = async () => {
+        const updatedComments = await fetchCommentsList(postId, token); 
+        setComments(updatedComments);
+    };
 
-// Fetch comments when the component mounts or postId changes
+
     useEffect(() => {
-        const getComments = async () => {
-            const commentList = await fetchCommentsList(postId, token);
-            if (commentList) {
-                setComments(commentList); 
-            }
-        };
+             updateComments(); // Fetch comments when the component mounts or postId changes
+        }, [postId, token]); 
 
-        getComments();
-    }, [postId, token]); 
-
-    
 
 
     return (
@@ -43,7 +36,7 @@ const CommentPopup = ({ postId, token, onClose }) => {
                     <h2>Comments</h2>
                     <div className="comment-container">
                          {comments.map(comment => (
-                            <Comment  key={comment._id} comment={comment} token={token} /> // Pass each comment to the Comment component
+                            <Comment  key={comment._id} postId ={postId} comment={comment} token={token} updateComments={updateComments} /> // Pass each comment to the Comment component
                         ))}
 
                     </div>

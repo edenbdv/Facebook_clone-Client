@@ -206,3 +206,49 @@ export const createComment = async (postId, text, token) => {
     }
 
 };
+
+export const  updateComment = async (postId, commentId ,text, token) => {
+
+    const url = `http://localhost:12346/api/posts/${postId}/comments/${commentId}`;
+
+    const response = await fetch(url, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ text }) 
+    });
+
+    if (response.ok) {
+        const updatedComment = await response.json();
+        console.log(`comment updated successfully:`, updatedComment);
+        return response;
+    } else {
+        const errorData = await response.json();
+        console.error("Failed to update comment", errorData);
+
+    }
+}
+
+export const  deleteComment =  async (postId, commentId ,token) => {
+    console.log("postId: ", postId)
+    console.log("commentId: ", commentId)
+
+    const response = await fetch(`http://localhost:12346/api/posts/${postId}/comments/${commentId}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    });
+
+    if (response.ok) {
+        const comment = await response.json();
+        console.log(`comment deleted successfully:`, comment);
+        return response
+    } else {
+        console.error("Failed to delete comment");
+    }
+
+}
