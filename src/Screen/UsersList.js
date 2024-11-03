@@ -1,32 +1,33 @@
 import React ,{ useEffect, useState }  from 'react';
 import {fetchUserData} from './api'
+import { Link } from 'react-router-dom'; 
 
-const FriendListPopup = ({ token, friends, handleClose }) => {
+const UsersListPopup = ({ token, users, header ,handleClose }) => {
 
-    const [friendDetails, setFriendDetails] = useState([]);
+    const [userDetails, setUserDetails] = useState([]);
 
     useEffect(() => {
-        const fetchFriendsDetails = async () => {
+        const fetchUserDetails = async () => {
             const details = await Promise.all(
-                friends.map(async (friend) => {
+                users.map(async (user) => {
                     try {
-                        const friendInfo = await fetchUserData(friend, token);
-                        return friendInfo; 
+                        const userInfo = await fetchUserData(user, token);
+                        return userInfo; 
                     } catch (error) {
-                        console.error('Error fetching friend data:', error);
-                        return { profilePic: '', displayName: 'Unknown', id: friend };
+                        console.error('Error fetching user data:', error);
+                        return { profilePic: '', displayName: 'Unknown', id: user };
                     }
                 })
             );
-            setFriendDetails(details);
+            setUserDetails(details);
         };
     
-        fetchFriendsDetails();
-    }, [friends, token]); // The effect runs when 'friends' or 'token' changes
+        fetchUserDetails();
+    }, [users, token]); // The effect runs when 'users' or 'token' changes
 
 
     // Check if friends is null or undefined
-    if (friends === null || friends.length === 0) {
+    if (users === null || users.length === 0) {
         return (
             <div className="popup-container">
                 <div className="popup" onClick={(e) => e.stopPropagation()}>
@@ -41,27 +42,35 @@ const FriendListPopup = ({ token, friends, handleClose }) => {
         );
     }
 
-    if (!Array.isArray(friends)) {
+    if (!Array.isArray(users)) {
         return null; 
     }
 
 
-    // Render the list of friends
+    // Render the list of users
     return (
         <div className="popup-container">
             <div className="popup" onClick={(e) => e.stopPropagation()}>
                 <div className="popup-content">
+                    <h2>{header}</h2>
+
                     <button className="close-button" onClick={handleClose}>
                         <i className="bi bi-x-circle"></i>
                     </button>
-                    {friendDetails.map((friend, index) => (
-                        <div className="friend-item" key={index}>
-                            <img
-                                src={`data:image/jpeg;base64,${friend.profilePic}`} 
+                    {userDetails.map((user, index) => (
+                        <div className="friend-item mb-3" key={index}>
+                
+                            <Link
+                                to={`/profile/${user.username}`}
+                                className="author-link"
+                            >
+                               <img
+                                src={`data:image/jpeg;base64,${user.profilePic}`} 
                                 alt="Profile"
                                 className="rounded-circle profile-image"
                                 />
-                            <span className="display-name">{friend.displayName}</span>
+                                <span className="display-name fw-bold">{user.displayName}</span>
+                            </Link>
                         </div>
                     ))}
                 </div>
@@ -70,4 +79,4 @@ const FriendListPopup = ({ token, friends, handleClose }) => {
     );
 };
 
-export default FriendListPopup;
+export default UsersListPopup;
