@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { acceptFriendRequest, deleteFriendRequest } from '../Request_api';
 import {fetchUserData} from '../api'
+import { Link } from 'react-router-dom'; 
 
 
 
@@ -67,12 +68,18 @@ const FRequestsPopup = ({ token, currentUser, friendreqs, handleClose, onHandleF
                                         return (
                                         <li key={request.username}>
                                             <div className="friend-item">
-                                                <img
-                                                    src={`data:image/jpeg;base64,${request.profilePic}`} 
-                                                    alt="Profile"
-                                                    className="rounded-circle profile-image"
-                                                    />
-                                                <span className="display-name">{request.displayName}</span>
+                                            <Link
+                                                to={`/profile/${request.username}`}
+                                                className="author-link"
+                                            >
+                                            <img
+                                                src={`data:image/jpeg;base64,${request.profilePic}`} 
+                                                alt="Profile"
+                                                className="rounded-circle profile-image"
+                                                />
+                                                <span className="display-name fw-bold ">{request.displayName}</span>
+                                            </Link>
+
                                                 <button onClick={() => handleAcceptRequest(request.username)}>Accept</button>
                                                 <button onClick={() => handleDeleteRequest(request.username)}>Delete</button>
                                             </div>

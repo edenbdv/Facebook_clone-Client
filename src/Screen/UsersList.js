@@ -1,5 +1,6 @@
 import React ,{ useEffect, useState }  from 'react';
 import {fetchUserData} from './api'
+import { Link } from 'react-router-dom'; 
 
 const UsersListPopup = ({ token, users, header ,handleClose }) => {
 
@@ -58,12 +59,18 @@ const UsersListPopup = ({ token, users, header ,handleClose }) => {
                     </button>
                     {userDetails.map((user, index) => (
                         <div className="friend-item mb-3" key={index}>
-                            <img
+                
+                            <Link
+                                to={`/profile/${user.username}`}
+                                className="author-link"
+                            >
+                               <img
                                 src={`data:image/jpeg;base64,${user.profilePic}`} 
                                 alt="Profile"
                                 className="rounded-circle profile-image"
                                 />
-                            <span className="display-name">{user.displayName}</span>
+                                <span className="display-name fw-bold">{user.displayName}</span>
+                            </Link>
                         </div>
                     ))}
                 </div>
