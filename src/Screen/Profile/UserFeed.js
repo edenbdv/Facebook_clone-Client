@@ -135,6 +135,8 @@ const UserFeed = ({ posts, token }) => {
           username={post.createdBy}
           onDelete={deletePost} 
           onEditPost={(fieldName, newValue) => editPost(post._id, fieldName, newValue)} 
+          token = {token} 
+
         />
       ))}
     </div>

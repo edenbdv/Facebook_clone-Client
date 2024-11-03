@@ -38,16 +38,7 @@ const Feed = ({ posts, onDeletePost, onEditPost, token }) => {
   }, [posts, token]);
 
 
-  // const addPrefixIfNeeded = (url) => {
-  //   if (!url) {
-  //     return ''; 
-  //   }
-  //   const prefix = 'data:image/jpeg;base64,';
-  //   if (!url.startsWith(prefix)) {
-  //     return prefix + url;
-  //   }
-  //   return url;
-  // };
+
   
 
   return (
