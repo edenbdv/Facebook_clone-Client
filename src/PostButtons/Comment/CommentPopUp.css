@@ -5,6 +5,9 @@
     margin: 20px ;
 }
 
+ .close-btn:hover {
+  cursor: pointer;
+}
 
 .night-mode .comment-popup-window {
     background-color: darkgray;

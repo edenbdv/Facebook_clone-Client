@@ -3,20 +3,32 @@ import LikeButton from '../PostButtons/LikeButton';
 import ShareButton from '../PostButtons/ShareButton';
 import CommentButton from '../PostButtons/Comment/CommentButton';
 import CommentPopUp from '../PostButtons/Comment/CommentPopUp';
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { Link } from 'react-router-dom'; 
 import EditPost from './Edit/EditPost';
 import EditPostForm from './Edit/EditPostForm'; 
 import DeletePost from './Delete/DeletePost';
 import { formatDate } from  '../utils';
-
+import { getLikes ,likePost, unlikePost } from '../Screen/api';
 
 function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onDelete, onEditPost, token }) {
     const [editing, setEditing] = useState(false);
     const [liked, setLiked] = useState(false);
     const [showComments, setShowComments] = useState(false);
-    // const [comments, setComments] = useState([]);
     const currentUser = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).username : null;
+    const [likeCount, setLikeCount] = useState(0);  
+
+       // Fetch the like count when the component mounts
+       useEffect(() => {
+        const fetchLikes = async () => {
+            const likes = await getLikes(_id, token);
+            if (likes) setLikeCount(likes.length);  // Set like count to the length of the likes array
+            setLiked(likes.includes(currentUser));  // Check if the current user has liked the post
+
+        };
+
+        fetchLikes();
+    }, [_id, token, currentUser]);
 
 
     const handleEditClick = () => {
@@ -41,28 +53,21 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
         setShowComments(!showComments);
     };
 
-    // const addComment = (newComment) => {
-    //     const newCommentObject = { id: comments.length + 1, text: newComment };
-    //     setComments([...comments, newCommentObject]);
-    // };
 
-    // const deleteComment = (commentId) => {
-    //     setComments(comments.filter(comment => comment.id !== commentId));
-    // };
-
-    // const editComment = (commentId, editedContent) => {
-    //     setComments(comments.map(comment => {
-    //         if (comment.id === commentId) {
-    //             return { ...comment, text: editedContent };
-    //         }
-    //         return comment;
-    //     }));
-    // };
-
-
-    const handleLikeClick = () => {
-        setLiked(!liked);
-    };
+    const handleLikeClick = async () => {
+        if (liked) {
+            const response = await unlikePost(_id, token);
+            if (response) {
+                setLiked(false);
+                setLikeCount((prevCount) => Math.max(prevCount - 1, 0));
+            }
+        } else {
+            const response = await likePost(_id, token);
+            if (response) {
+                setLiked(true);
+                setLikeCount((prevCount) => prevCount + 1);
+            }
+        }    };
 
     const handleDeleteClick = () => {
         onDelete(_id); 
@@ -118,9 +123,21 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
                         <img src={picture} className="post-image" alt="Post" />
                     </div>
                 )}
+
+                {likeCount > 0 && (
+                <span className="d-flex align-items-center ms-2 mt-2 text-primary">
+                    <i className="bi bi-hand-thumbs-up me-1"></i> {/* Thumbs-up icon with some margin */}
+                    {likeCount} {/* Display like count */}
+
+                </span>)}
+
+
                 <div className="card-footer d-flex justify-content-between align-items-center">
+                    
                 <div className="col-4 d-flex justify-content-center">
-                    <LikeButton liked={liked} handleLikeClick={handleLikeClick} />
+                    <LikeButton 
+                        liked={liked} 
+                        handleLikeClick={handleLikeClick} />
                 </div>
                 <div className="col-4 d-flex justify-content-center">
                     <CommentButton onClick={toggleComments} />
@@ -133,10 +150,6 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
             {showComments && <CommentPopUp
                    postId = { _id}
                    token = {token}
-                // comments={comments}
-                // addComment={addComment}
-                // deleteComment={deleteComment}
-                // editComment={editComment}
                 onClose={() => setShowComments(false)}
             />}
         </div>

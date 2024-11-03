@@ -60,6 +60,8 @@ const EditProfilePopup = ({handleClose, handleSave }) => {
         <div className="popup-container">
             <div className="popup" onClick={(e) => e.stopPropagation()}>
                 <div className="popup-content">
+                     <h2>Edit Profile</h2>
+
                     <button className="close-button" onClick={handleClose}>
                         <i className="bi bi-x-circle"></i> 
                     </button>

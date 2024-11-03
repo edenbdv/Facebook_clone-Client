@@ -216,7 +216,6 @@ export const  updateComment = async (postId, commentId ,text, token) => {
     });
 
     if (response.ok) {
-        const updatedComment = await response.json();
         return response;
     } else {
         const errorData = await response.json();
@@ -236,10 +235,74 @@ export const  deleteComment =  async (postId, commentId ,token) => {
     });
 
     if (response.ok) {
-        const comment = await response.json();
         return response
     } else {
         console.error("Failed to delete comment");
     }
 
+}
+
+//likes:
+
+export const getLikes = async (postId, token) => {
+
+    const response = await fetch(`http://localhost:12346/api/posts/${postId}/likes`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    });
+
+    if (response.ok) {
+        const likes = await response.json();
+        console.log(`get likes successfully:`, likes);
+        return likes;
+     
+
+    } else {
+        console.error("Failed to like a post");
+    }
+};
+
+
+export const likePost = async (postId, token) => {
+
+    const response = await fetch(`http://localhost:12346/api/posts/${postId}/likes`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    });
+
+    if (response.ok) {
+        const likes = await response.json();
+        console.log(`post liked successfully:`, likes);
+        return likes;
+     
+
+    } else {
+        console.error("Failed to like a post");
+    }
+};
+
+
+export const unlikePost = async (postId, token) => {
+
+    const response = await fetch(`http://localhost:12346/api/posts/${postId}/likes`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    });
+
+    if (response.ok) {
+        const likes = await response.json();
+        console.log(`post unliked successfully:`, likes);
+        return likes;
+    } else {
+        console.error("Failed to like a post");
+    }
 }
