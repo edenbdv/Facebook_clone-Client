@@ -48,8 +48,7 @@ function LoginForm({ onLogin }) {
     
                 // Pass the token forward to upper classes
                 onLogin(formData.username, token);
-                //console.log('User logged in:', formData.username);
-                // After successful login
+              
             } else {
                 const errorData = await response.json();
                 // Handle login error

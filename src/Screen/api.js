@@ -4,7 +4,6 @@ const config = require('../config');
 
 export const fetchUserPosts = async (userId, token) => {
     try {
-        //console.log("TOKEN ", token);
         const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/users/${userId}/posts`, {
             method: 'GET',
             headers: {
@@ -38,7 +37,6 @@ export const fetchUserData = async (userId, token) => {
             if (response.ok) {
                 // If the request is successful, parse the response
                 const userData = await response.json();
-                //console.log('User details:', userData);
                 return userData;
             } else {
                 // Handle error if the request fails
@@ -124,7 +122,6 @@ export const sendFriendRequest = async (friendUsername, token) => {
 export const saveChanges = async (userId, fieldName, fieldValue, token) => {
     try {
 
-        console.log("data to change: " ,fieldName ," - ", fieldValue )
 
         const response = await fetch(`http://${config.server.ip}:${config.server.port}/api/users/${userId}`, {
             method: 'PATCH',
@@ -168,7 +165,6 @@ export const fetchCommentsList = async (postId, token) => {
             for (const comment of data) {
                 commentLst.push(comment);
             }
-            console.log("commentLst:",commentLst);
             return commentLst;
         } else {
             console.error('Failed to fetch comments:', response.statusText);
@@ -194,7 +190,6 @@ export const createComment = async (postId, text, token) => {
 
     if (response.ok) {
         const comment = await response.json();
-        console.log(`comment created successfully:`, comment);
         return comment;
 
     } else {
@@ -222,7 +217,6 @@ export const  updateComment = async (postId, commentId ,text, token) => {
 
     if (response.ok) {
         const updatedComment = await response.json();
-        console.log(`comment updated successfully:`, updatedComment);
         return response;
     } else {
         const errorData = await response.json();
@@ -232,8 +226,6 @@ export const  updateComment = async (postId, commentId ,text, token) => {
 }
 
 export const  deleteComment =  async (postId, commentId ,token) => {
-    console.log("postId: ", postId)
-    console.log("commentId: ", commentId)
 
     const response = await fetch(`http://localhost:12346/api/posts/${postId}/comments/${commentId}`, {
         method: "DELETE",
@@ -245,7 +237,6 @@ export const  deleteComment =  async (postId, commentId ,token) => {
 
     if (response.ok) {
         const comment = await response.json();
-        console.log(`comment deleted successfully:`, comment);
         return response
     } else {
         console.error("Failed to delete comment");

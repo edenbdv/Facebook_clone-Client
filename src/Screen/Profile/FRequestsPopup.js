@@ -40,7 +40,6 @@ const FRequestsPopup = ({ token, currentUser, friendreqs, handleClose, onHandleF
 
     const handleDeleteRequest = async (friendId) => {
         try {
-            console.log("try to delete req")
             await deleteFriendRequest(currentUser, friendId, token);
             onHandleFriendRequest();
 
@@ -64,7 +63,6 @@ const FRequestsPopup = ({ token, currentUser, friendreqs, handleClose, onHandleF
                         {friendReqDetails.length > 0 ? (
                             <ul>
                                 {friendReqDetails.map((request) => {
-                                    //  console.log('Friend Request:', request);
 
                                         return (
                                         <li key={request.username}>

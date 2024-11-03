@@ -22,7 +22,6 @@ const FriendProfile = ({ visitedUser, token }) => {
     const handleCloseFriendList = () => {
         setShowFriendList(false);
     };
-    console.log("visitedUser",visitedUser)
 
 
     const fetchUserDetails = async () => {

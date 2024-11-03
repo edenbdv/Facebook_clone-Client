@@ -30,7 +30,6 @@ function LoginForm({ onLogin,usersData  }) {
         e.preventDefault();
         let errors = {};
 
-        console.log("users: ",usersData );
          
         if (!usersData[formData.username]) {
             errors.username = 'Invalid username'
@@ -48,7 +47,6 @@ function LoginForm({ onLogin,usersData  }) {
         // If there are no errors, proceed with form submission
         if (Object.keys(errors).length === 0) {
             onLogin(formData.username);
-            console.log('User logged in:', formData.username);
             // After successful login
         }
 

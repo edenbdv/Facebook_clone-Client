@@ -38,8 +38,6 @@ const EditProfilePopup = ({handleClose, handleSave }) => {
 
     };
 
-    console.log("editedUserData: ",editedUserData);
-
 
     const handleSaveClick = async (e,fieldName) => {
         e.preventDefault();

@@ -29,7 +29,6 @@ const Comment = ({ postId, comment, token, updateComments }) => {
 
     // Function to initiate editing
     const handleEditComment = (commentId, text) => {
-        console.log("need to edit")
         setEditedCommentId(commentId);
         setEditedText(text);
     };
@@ -46,7 +45,6 @@ const Comment = ({ postId, comment, token, updateComments }) => {
         if (response.status === 200) {
             await updateComments();
             handleCancelEdit();
-            console.log("editedCommentId after reset:",editedCommentId)
         } else {
             console.error("Error saving comment");
         }

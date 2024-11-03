@@ -14,7 +14,6 @@ const UserFeed = ({ posts, token }) => {
       const parsedUserData = JSON.parse(storedUserData);
       setUserData(parsedUserData);
     }
-    console.log('userData', userData)
 
   }, [postsWithUserData, token]);
 

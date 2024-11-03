@@ -26,7 +26,6 @@ export const acceptFriendRequest = async (userId, friendId, token) => {
 
 export const deleteFriendRequest = async (userId, friendId, token) => {
     const url = `http://${config.server.ip}:${config.server.port}/api/users/${userId}/friends/${friendId}`;
-    console.log("id in api:",userId)
 
     try {
         const response = await fetch(url, {

@@ -33,15 +33,11 @@ const UserProfile = ({ token }) => {
                 setUserDetails(userInfo);
                 setFriendsList(friends);
                 
-                console.log("userdata before: ",storedUserData)
-                console.log("userInfo(fetched):",userInfo)
 
                 // Update local storage with merged user data
                 const updatedUserData = { ...storedUserData, ...userInfo };
                 localStorage.setItem('userData', JSON.stringify(updatedUserData));
                 setStoredUserData(updatedUserData);
-
-                console.log("userdata after: ",updatedUserData)
 
             } catch (error) {
                 console.error('Error fetching user data:', error);
@@ -96,7 +92,6 @@ const UserProfile = ({ token }) => {
         try {
             const response = await saveChanges(storedUserData.username, fieldName, fieldValue, token);
             if (response.success) {
-                console.log("True")
               
                 fetchUserDetails(); 
                 return true;
