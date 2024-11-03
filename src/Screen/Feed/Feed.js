@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PostItem from '../../Post/PostItem';
 import { fetchUserData } from '../api';
+import { addPrefixIfNeeded } from '../../utils';
 
 const Feed = ({ posts, onDeletePost, onEditPost, token }) => {
 
@@ -37,16 +38,16 @@ const Feed = ({ posts, onDeletePost, onEditPost, token }) => {
   }, [posts, token]);
 
 
-  const addPrefixIfNeeded = (url) => {
-    if (!url) {
-      return ''; 
-    }
-    const prefix = 'data:image/jpeg;base64,';
-    if (!url.startsWith(prefix)) {
-      return prefix + url;
-    }
-    return url;
-  };
+  // const addPrefixIfNeeded = (url) => {
+  //   if (!url) {
+  //     return ''; 
+  //   }
+  //   const prefix = 'data:image/jpeg;base64,';
+  //   if (!url.startsWith(prefix)) {
+  //     return prefix + url;
+  //   }
+  //   return url;
+  // };
   
 
   return (
@@ -61,7 +62,8 @@ const Feed = ({ posts, onDeletePost, onEditPost, token }) => {
           isoDate={post.createdAt} 
           username={post.createdBy}
           onDelete={onDeletePost} 
-          onEditPost={(fieldName, newValue) => onEditPost(post._id, fieldName, newValue)} 
+          onEditPost={(fieldName, newValue) => onEditPost(post._id, fieldName, newValue)}
+          token = {token} 
         />
       ))}
     </div>

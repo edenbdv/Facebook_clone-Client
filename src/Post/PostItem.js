@@ -8,23 +8,15 @@ import { Link } from 'react-router-dom';
 import EditPost from './Edit/EditPost';
 import EditPostForm from './Edit/EditPostForm'; 
 import DeletePost from './Delete/DeletePost';
+import { formatDate } from  '../utils';
 
-function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onDelete, onEditPost }) {
+
+function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onDelete, onEditPost, token }) {
     const [editing, setEditing] = useState(false);
     const [liked, setLiked] = useState(false);
     const [showComments, setShowComments] = useState(false);
-    const [comments, setComments] = useState([]);
+    // const [comments, setComments] = useState([]);
     const currentUser = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).username : null;
-
-    const date = new Date(isoDate);
-    const formattedDate = date.toLocaleString('en-US', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false, 
-      });
 
 
     const handleEditClick = () => {
@@ -49,23 +41,23 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
         setShowComments(!showComments);
     };
 
-    const addComment = (newComment) => {
-        const newCommentObject = { id: comments.length + 1, text: newComment };
-        setComments([...comments, newCommentObject]);
-    };
+    // const addComment = (newComment) => {
+    //     const newCommentObject = { id: comments.length + 1, text: newComment };
+    //     setComments([...comments, newCommentObject]);
+    // };
 
-    const deleteComment = (commentId) => {
-        setComments(comments.filter(comment => comment.id !== commentId));
-    };
+    // const deleteComment = (commentId) => {
+    //     setComments(comments.filter(comment => comment.id !== commentId));
+    // };
 
-    const editComment = (commentId, editedContent) => {
-        setComments(comments.map(comment => {
-            if (comment.id === commentId) {
-                return { ...comment, text: editedContent };
-            }
-            return comment;
-        }));
-    };
+    // const editComment = (commentId, editedContent) => {
+    //     setComments(comments.map(comment => {
+    //         if (comment.id === commentId) {
+    //             return { ...comment, text: editedContent };
+    //         }
+    //         return comment;
+    //     }));
+    // };
 
 
     const handleLikeClick = () => {
@@ -113,7 +105,7 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
                             </div>
                         )}
                         <div className="card-date  mt-2 ml-2" >
-                                {formattedDate}
+                                {formatDate(isoDate)}
                         </div>
                     </div>
                 </div>
@@ -139,10 +131,12 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
                 </div>
             </div>
             {showComments && <CommentPopUp
-                comments={comments}
-                addComment={addComment}
-                deleteComment={deleteComment}
-                editComment={editComment}
+                   postId = { _id}
+                   token = {token}
+                // comments={comments}
+                // addComment={addComment}
+                // deleteComment={deleteComment}
+                // editComment={editComment}
                 onClose={() => setShowComments(false)}
             />}
         </div>

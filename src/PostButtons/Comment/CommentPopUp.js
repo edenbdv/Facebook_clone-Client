@@ -1,17 +1,32 @@
 // CommentPopup.js
-import React, { useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import './CommentPopUp.css'
 import Comment from './Comment';
+import { fetchCommentsList, createComment } from '../../Screen/api';
 
-const CommentPopup = ({ comments, addComment, deleteComment, editComment, onClose }) => {
+const CommentPopup = ({ postId, token, onClose }) => {
     const [newComment, setNewComment] = useState('');
+    const [comments, setComments] = useState([]); 
 
-    const handleAddComment = () => {
+    const handleAddComment = async () => {
         if (newComment.trim() !== '') {
-            addComment(newComment);
+            await createComment(postId, newComment, token);
             setNewComment('');
+            updateComments(); // Refresh comments list after adding a new one
         }
     };
+
+    const updateComments = async () => {
+        const updatedComments = await fetchCommentsList(postId, token); 
+        setComments(updatedComments);
+    };
+
+
+    useEffect(() => {
+             updateComments(); // Fetch comments when the component mounts or postId changes
+        }, [postId, token]); 
+
+
 
     return (
         <div className="popup-container">
@@ -20,11 +35,10 @@ const CommentPopup = ({ comments, addComment, deleteComment, editComment, onClos
                     <span className="close-btn" onClick={onClose}>&times;</span>
                     <h2>Comments</h2>
                     <div className="comment-container">
-                        <Comment
-                            comments={comments}
-                            deleteComment={deleteComment}
-                            editComment={editComment}
-                        />
+                         {comments.map(comment => (
+                            <Comment  key={comment._id} postId ={postId} comment={comment} token={token} updateComments={updateComments} /> // Pass each comment to the Comment component
+                        ))}
+
                     </div>
                     <div className="comment-form">
                         <textarea

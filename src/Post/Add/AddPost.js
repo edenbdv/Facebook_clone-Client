@@ -96,7 +96,7 @@ const AddPost = ({ handleClosePopup, addNewPost }) => {
                         onChange={handleImageChange} 
                     />
                     {imagePreview && (
-                        <img src={imagePreview} alt="Image Preview" style={{ maxWidth: '100%', maxHeight: '150px' }} />                    )}
+                        <img src={imagePreview} alt="Image Preview" style={{ maxWidth: '100%', maxHeight: '150px' }} />  )}
                     <button 
                         className="btn btn-primary mt-2" 
                         onClick={handlePost}
