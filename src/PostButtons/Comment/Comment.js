@@ -9,6 +9,12 @@ const Comment = ({ postId, comment, token, updateComments }) => {
     const [userData, setUserData] = useState(null);    
     const [editedCommentId, setEditedCommentId] = useState(null);
     const [editedText, setEditedText] = useState('');
+    
+    const [storedUserData, setStoredUserData] = useState(() => {
+        const data = localStorage.getItem('userData');
+        return data ? JSON.parse(data) : null;
+    });
+
 
 
     // Function to delete comment
@@ -88,14 +94,18 @@ const Comment = ({ postId, comment, token, updateComments }) => {
                             <span className="display-name" style={{ marginRight: '10px' }}>{userData.displayName}</span>
                                 )}  
 
-                                   {/*edit and delete buttons - only for comment owner !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/}
-                            <button type="button" className="btn btn-outline-secondary btn-sm btn-edit" onClick={() => handleEditComment(comment.commentId, comment.text)}>
-                                <i className="bi bi-pencil"></i>
-                            </button>
+                                   {/*edit and delete buttons - only for comment owner */}
+                                   { storedUserData && storedUserData.username === comment.createdBy && (
+                                <>
+                                    <button type="button" className="btn btn-outline-secondary btn-sm btn-edit" onClick={() => handleEditComment(comment.commentId, comment.text)}>
+                                        <i className="bi bi-pencil"></i>
+                                    </button>
 
-                            <button type="button" className="btn btn-outline-secondary btn-sm btn-edit" onClick={() => handleDeleteComment(comment.commentId)}>
-                               <i className="bi bi-trash"></i>   
-                            </button>
+                                    <button type="button" className="btn btn-outline-secondary btn-sm btn-edit" onClick={() => handleDeleteComment(comment.commentId)}>
+                                        <i className="bi bi-trash"></i>
+                                    </button>
+                                </>
+                            )}
 
                               {/* Conditionally render input field only if editing */}
                               {editedCommentId === comment.commentId ? (
