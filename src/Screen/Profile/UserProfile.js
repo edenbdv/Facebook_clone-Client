@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import './Profile.css';
 import UserFeed from './UserFeed';
 import EditProfilePopup from './EditProfilePopup';
-import FriendListPopup from '../FriendList'; 
+import UsersListPopup from '../UsersList'; 
 import { useNavigate } from 'react-router-dom';
 import FRequestsPopup from './FRequestsPopup';
 import '../Menu.css'; 
@@ -191,10 +191,10 @@ const UserProfile = ({ token }) => {
             )}
             {/* Friend list popup */}
             {showFriendList && (
-                <FriendListPopup
-                    username = {storedUserData.username}
+                <UsersListPopup
                     token={token}
-                    friends={friendsList|| []} 
+                    users={friendsList|| []} 
+                    header={"Friends"}
                     handleClose={handleCloseFriendList} 
                 />
             )}

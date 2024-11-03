@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import './Profile.css';
 import Feed from '../Feed/Feed';
-import FriendListPopup from '../FriendList'; 
+import UsersListPopup from '../UsersList'; 
 import { useNavigate } from 'react-router-dom';
 import { fetchUserData, fetchUserPosts, fetchFriendsList } from '../api';
 
@@ -99,9 +99,11 @@ const FriendProfile = ({ visitedUser, token }) => {
             </div>
             {/* Friend list popup */}
             {showFriendList && (
-                <FriendListPopup
+                <UsersListPopup
                     token={token}
-                    friends={friendsList || []} 
+                    users={friendsList || []} 
+                    header={"Friends"}
+
                     handleClose={handleCloseFriendList}
                 />
             )}

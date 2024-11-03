@@ -10,13 +10,17 @@ import EditPostForm from './Edit/EditPostForm';
 import DeletePost from './Delete/DeletePost';
 import { formatDate } from  '../utils';
 import { getLikes ,likePost, unlikePost } from '../Screen/api';
+import UsersListPopup from  '../Screen/UsersList';
 
 function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onDelete, onEditPost, token }) {
     const [editing, setEditing] = useState(false);
     const [liked, setLiked] = useState(false);
     const [showComments, setShowComments] = useState(false);
     const currentUser = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).username : null;
+    const [likeLst, setLikeLst] = useState(null);  
     const [likeCount, setLikeCount] = useState(0);  
+    const [showLikesPopup, setShowLikesPopup] = useState(false); 
+
 
        // Fetch the like count when the component mounts
        useEffect(() => {
@@ -24,6 +28,7 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
             const likes = await getLikes(_id, token);
             if (likes) setLikeCount(likes.length);  // Set like count to the length of the likes array
             setLiked(likes.includes(currentUser));  // Check if the current user has liked the post
+            setLikeLst(likes); 
 
         };
 
@@ -56,21 +61,28 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
 
     const handleLikeClick = async () => {
         if (liked) {
-            const response = await unlikePost(_id, token);
-            if (response) {
+            const likes = await unlikePost(_id, token);
+            if (likes) {
                 setLiked(false);
                 setLikeCount((prevCount) => Math.max(prevCount - 1, 0));
+                setLikeLst(likes); 
             }
         } else {
-            const response = await likePost(_id, token);
-            if (response) {
+            const likes = await likePost(_id, token);
+
+            if (likes) {
                 setLiked(true);
                 setLikeCount((prevCount) => prevCount + 1);
+                setLikeLst(likes); 
             }
         }    };
 
     const handleDeleteClick = () => {
         onDelete(_id); 
+    };
+
+    const toggleLikesPopup = () => {
+        setShowLikesPopup(!showLikesPopup);
     };
 
     return (
@@ -125,7 +137,7 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
                 )}
 
                 {likeCount > 0 && (
-                <span className="d-flex align-items-center ms-2 mt-2 text-primary">
+                    <span className="d-flex align-items-center ms-2 mt-2 text-primary" onClick={toggleLikesPopup} style={{ cursor: 'pointer' }}>
                     <i className="bi bi-hand-thumbs-up me-1"></i> {/* Thumbs-up icon with some margin */}
                     {likeCount} {/* Display like count */}
 
@@ -152,6 +164,15 @@ function PostItem({ _id, text, picture, authorP, authorN, isoDate, username, onD
                    token = {token}
                 onClose={() => setShowComments(false)}
             />}
+
+            {showLikesPopup && (
+                <UsersListPopup
+                    token={token}
+                    users = {likeLst}
+                    header={"Likes"}
+                    handleClose={() => setShowLikesPopup(false)}
+                />
+              )}
         </div>
     );
 }
