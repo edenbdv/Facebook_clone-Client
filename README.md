@@ -1,7 +1,6 @@
 # Facebook_clone-client
 
-<img width="922" alt="‏‏Feed" src="https://github.com/user-attachments/assets/a122e367-369f-44a8-b253-3128fd96639d">
-
+<img width="916" alt="‏‏Feed" src="https://github.com/user-attachments/assets/21c4aa4f-3868-4b31-94b7-fa83bf640bb3">
 
 
 
@@ -61,10 +60,11 @@ The core feature of Foobar is its feed, where users can view updates, posts, and
 - **Navigation Buttons:**
   - **Log Out:** Redirects to the login page and logs out the current user.
   - **Night Mode:** Switches the site's theme.
-
-<img width="922" alt="‏‏Feed" src="https://github.com/user-attachments/assets/b97d8a45-7bd7-4dd5-b956-e6f4f1cbc1be">
+  - 
+<img width="916" alt="‏‏Feed" src="https://github.com/user-attachments/assets/66fad14e-983a-4382-b67a-e292c9ee81a3">
 <img width="952" alt="Feed2" src="https://github.com/user-attachments/assets/ab15f9d9-d73b-4803-adfd-62823b706e4c">
 <img width="948" alt="comments" src="https://github.com/user-attachments/assets/3c9f6b19-645c-4c63-a02f-92a37a9ba610">
+<img width="951" alt="likes" src="https://github.com/user-attachments/assets/97f12a06-1c1b-40c1-bc02-ed0c26c9262f">
 
 
 ### **Profile Page**
@@ -79,6 +79,7 @@ The Profile page in Foobar provides users with an overview of their personal inf
 - **User Interaction:** Users can explore additional options related to their friends and friend requests, enhancing their networking experience on Foobar.
 
 This user-friendly interface ensures that managing personal profiles and social connections is efficient and intuitive.
+  <img width="952" alt="edit-profile" src="https://github.com/user-attachments/assets/b1e05037-031c-4e95-b11c-2991d1adee97">
   <img width="1131" alt="‏‏לכידה" src="https://github.com/user-attachments/assets/41f0069f-64d6-462e-a972-b2b7ff773ad1">
 
 
