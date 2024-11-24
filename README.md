@@ -99,7 +99,8 @@ To run the client application using Docker, follow the steps below:
 First, navigate to the directory containing the `Dockerfile`. Then, run the following command to build the Docker image:
 
 ```bash
-docker build -t facebook-clone-client .
+docker build -t facebook-clone-client.
+```
 
 This will create a Docker image named facebook-clone-client based on the instructions in the Dockerfile.
 
@@ -108,6 +109,7 @@ This will create a Docker image named facebook-clone-client based on the instruc
 
 ```bash
 docker run -p 3000:3000 --env-file .env facebook-clone-client
+```
 - Once the Docker container is running, open your browser and navigate to http://localhost:3000. You should be able to see and interact with the client application.
 
 ### Running the Client without Docker
