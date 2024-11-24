@@ -84,6 +84,34 @@ This user-friendly interface ensures that managing personal profiles and social 
 
 
 
+## Running the client-side:
+
+-**important note**: you will need also the clone and run the bloom-filter server (the web server comminucates with it) 
+you can see the instructuins for it right here:
+Bloom-Filter server: https://github.com/edenbdv/BloomFilter.git
+
+### Running the Client with Docker
+
+To run the client application using Docker, follow the steps below:
+
+1. **Build the Docker Image**
+
+First, navigate to the directory containing the `Dockerfile`. Then, run the following command to build the Docker image:
+
+```bash
+docker build -t facebook-clone-client .
+
+This will create a Docker image named facebook-clone-client based on the instructions in the Dockerfile.
+
+ 2.  **Run the Docker Container**
+-After building the Docker image, you can run the container using the following command:
+
+```bash
+docker run -p 3000:3000 --env-file .env facebook-clone-client
+- Once the Docker container is running, open your browser and navigate to http://localhost:3000. You should be able to see and interact with the client application.
+
+### Running the Client without Docker
+
 ## Dependencies
 
 - **Frontend:**
@@ -91,12 +119,6 @@ This user-friendly interface ensures that managing personal profiles and social 
   - React Router
   - Bootstrap
  
-
-## Running the client-side:
-
--**important note**: you will need also the clone and run the bloom-filter server (the web server comminucates with it) 
-you can see the instructuins for it right here:
-Bloom-Filter server: https://github.com/edenbdv/BloomFilter.git
 
 1. Clone the repository:
 
